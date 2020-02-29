@@ -14,10 +14,28 @@ class Nonogram:
 
         self.solution = [[-1 for y in range(self.size_y)] \
                             for x in range(self.size_x) ]
-        self.clue_x = [[] for x in range(self.size_x)]
-        self.clue_y = [[] for y in range(self.size_y)]
+        self.clues_x = [[] for x in range(self.size_x)]
+        self.clues_y = [[] for y in range(self.size_y)]
 
-    def print(self):
+    def set_clues_x(self, *clues):
+        if len(clues) != self.size_x:
+            raise ValueError
+        for index, clue in enumerate(clues):
+            min_length_clue = sum(clue) + len(clue) - 1
+            if(min_length_clue > self.size_x):
+                raise ValueError
+            self.clues_x[index] = clue
+
+    def set_clues_y(self, *clues):
+        if len(clues) != self.size_y:
+            raise ValueError
+        for index, clue in enumerate(clues):
+            min_length_clue = sum(clue) + len(clue) - 1
+            if(min_length_clue > self.size_y):
+                raise ValueError
+            self.clues_y[index] = clue
+
+    def print_solution(self):
         top_row = "+" + self.size_x * "--+"
         print(top_row)
         for y in range(self.size_y):
@@ -26,3 +44,11 @@ class Nonogram:
                 row += f"{self.printable_values[self.solution[x][y]]}|"
             print(row)
             print(top_row)
+
+    def print_clues(self):
+        print("Horizontal clues:")
+        for clue in self.clues_x:
+            print(clue)
+        print("Vertical clues:")
+        for clue in self.clues_y:
+            print(clue)
