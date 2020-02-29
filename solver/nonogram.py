@@ -58,3 +58,12 @@ class Nonogram:
         print("Vertical clues:")
         for clue in self.clues[self.y]:
             print(clue)
+
+    def _set_solution_row(self, input_axis, row_index, solution_row):
+        if input_axis == self.x:
+            self.solution[row_index] = solution_row
+        elif input_axis == self.y:
+            for index, value in enumerate(solution_row):
+                self.solution[index][row_index] = value
+        else:
+            raise ValueError
