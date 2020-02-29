@@ -4,6 +4,10 @@ class Nonogram:
     Used to hold the data of the nonogram.
     also has some basic creation and helper functions
     """
+    printable_values = {-1: "  ",
+                         0: "..",
+                         1: "XX"}
+
     def __init__(self, size_x, size_y):
         self.size_x = size_x
         self.size_y = size_y
@@ -19,6 +23,6 @@ class Nonogram:
         for y in range(self.size_y):
             row = "|"
             for x in range(self.size_x):
-                row += "  |"
+                row += f"{self.printable_values[self.solution[x][y]]}|"
             print(row)
             print(top_row)
