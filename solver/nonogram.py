@@ -21,8 +21,8 @@ class Nonogram:
         self.solution = [[-1 for y in range(self.size[self.y])]\
                              for x in range(self.size[self.x])]
         self.clues = [0, 0]
-        self.clues[self.x] = [[] for x in range(self.size[self.x])]
-        self.clues[self.y] = [[] for y in range(self.size[self.y])]
+        self.clues[self.x] = [[] for x in range(self.size[self.y])]
+        self.clues[self.y] = [[] for y in range(self.size[self.x])]
 
     def set_clues_x(self, *clues):
         return self.set_clues("x", *clues)
@@ -32,14 +32,19 @@ class Nonogram:
 
     def set_clues(self, input_axis, *clues):
         cur_axis = self.axis[input_axis]
+        other_axis = not cur_axis
 
-        if len(clues) != self.size[cur_axis]:
+        if len(clues) != self.size[other_axis]:
             raise ValueError
         for index, clue in enumerate(clues):
             min_length_clue = sum(clue) + len(clue) - 1
             if(min_length_clue > self.size[cur_axis]):
                 raise ValueError
             self.clues[cur_axis][index] = clue
+
+    def is_complete(self):
+        result = all(x != -1 for row in self.solution for x in row)
+        return result
 
     def print_solution(self):
         top_row = "+" + self.size[self.x] * "--+"
