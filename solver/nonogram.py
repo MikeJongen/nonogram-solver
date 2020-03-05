@@ -18,11 +18,17 @@ class Nonogram:
         self.size[self.x] = size_x
         self.size[self.y] = size_y
 
-        self.solution = [[-1 for y in range(self.size[self.y])]\
-                             for x in range(self.size[self.x])]
+        self.solution = [[-1 for y in range(self.get_size_y())]\
+                             for x in range(self.get_size_x())]
         self.clues = [0, 0]
-        self.clues[self.x] = [[] for x in range(self.size[self.y])]
-        self.clues[self.y] = [[] for y in range(self.size[self.x])]
+        self.clues[self.x] = [[] for x in range(self.get_size_y())]
+        self.clues[self.y] = [[] for y in range(self.get_size_x())]
+
+    def get_size_x(self):
+        return self.size[self.x]
+
+    def get_size_y(self):
+        return self.size[self.y]
 
     def set_clues_x(self, *clues):
         return self.set_clues("x", *clues)
@@ -47,11 +53,11 @@ class Nonogram:
         return result
 
     def print_solution(self):
-        top_row = "+" + self.size[self.x] * "--+"
+        top_row = "+" + self.get_size_x() * "--+"
         print(top_row)
-        for y in range(self.size[self.y]):
+        for y in range(self.get_size_y()):
             row = "|"
-            for x in range(self.size[self.x]):
+            for x in range(self.get_size_x()):
                 row += f"{self.printable_values[self.solution[x][y]]}|"
             print(row)
             print(top_row)
