@@ -71,9 +71,9 @@ class Nonogram:
             print(clue)
 
     def _set_solution_row(self, input_axis, row_index, solution_row):
-        if input_axis == self.x:
+        if input_axis == self.y:
             self.solution[row_index] = solution_row
-        elif input_axis == self.y:
+        elif input_axis == self.x:
             for index, value in enumerate(solution_row):
                 self.solution[index][row_index] = value
         else:
