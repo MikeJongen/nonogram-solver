@@ -36,6 +36,50 @@ class BasicSolver(Nonogram):
 
         return self._number_of_solutions(empty_spaces, no_clues)
 
+    def get_all_solutions(self, input_axis, index):
+        """Returns a list with all possible solutions for the row"""
+        cur_axis = self.axis[input_axis]
+        cur_clue = self.clues[cur_axis][index]
+        row_size = self.size[cur_axis]
+
+        solutions_list = []
+        return self._list_of_solutions(solutions_list, [], \
+                                       cur_clue, row_size)
+
+    def _list_of_solutions(self, total, start, clue, size):
+        if len(clue) == 0:
+            solution = []
+            for i in range(size):
+                solution.append(0)
+            total.append(solution)
+            return total
+        elif len(clue) == 1:
+            no_solutions = size - clue[0] + 1
+            for solution_no in range(no_solutions):
+                solution = start[:]
+                for i in range(solution_no):
+                    solution.append(0)
+                for i in range(clue[0]):
+                    solution.append(1)
+                for i in range(size - clue[0] - solution_no):
+                    solution.append(0)
+                total.append(solution)
+            return total
+        else:
+            no_solutions = size - clue[0] + 1
+            for solution_no in range(no_solutions):
+                solution = start[:]
+                for i in range(solution_no):
+                    solution.append(0)
+                for i in range(clue[0]):
+                    solution.append(1)
+                solution.append(0)
+                new_size = size - clue[0] - solution_no - 1
+                total = self._list_of_solutions(total, solution, \
+                                                clue[1:], new_size)
+            return total
+
+
     def _number_of_solutions(self, empty_spaces, no_clues):
         if no_clues == 1:
             return empty_spaces + 1
@@ -46,3 +90,14 @@ class BasicSolver(Nonogram):
             for i in range(empty_spaces + 1):
                 solutions += self._number_of_solutions(i, no_clues - 1)
             return solutions
+
+    def _get_matching_solution(self, row1, row2):
+        if len(row1) != len(row2):
+            raise ValueError
+        solution = []
+        for value1, value2 in zip(row1, row2):
+            if value1 == value2:
+                solution.append(value1)
+            else:
+                solution.append(-1)
+        return solution
