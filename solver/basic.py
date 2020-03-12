@@ -1,4 +1,4 @@
-from solver.nonogram import Nonogram
+from nonogram import Nonogram
 
 class BasicSolver(Nonogram):
     """simple solver class
@@ -25,3 +25,24 @@ class BasicSolver(Nonogram):
             raise ValueError
 
         self._set_solution_row(cur_axis, index, row_solution)
+
+    def get_number_of_solutions_total(self, input_axis, index):
+        """Returns the number of possible solutions for the row"""
+        cur_axis = self.axis[input_axis]
+        cur_clue = self.clues[cur_axis][index]
+        length_clue = sum(cur_clue) + len(cur_clue) - 1
+        empty_spaces = self.size[cur_axis] - length_clue
+        no_clues = len(cur_clue)
+
+        return self._number_of_solutions(empty_spaces, no_clues)
+
+    def _number_of_solutions(self, empty_spaces, no_clues):
+        if no_clues == 1:
+            return empty_spaces + 1
+        elif no_clues == 0:
+            return 1
+        else:
+            solutions = 0
+            for i in range(empty_spaces + 1):
+                solutions += self._number_of_solutions(i, no_clues - 1)
+            return solutions
