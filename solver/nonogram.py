@@ -1,3 +1,5 @@
+import json
+
 class Nonogram:
     """Main nonogram class
 
@@ -69,6 +71,18 @@ class Nonogram:
         print("Vertical clues:")
         for clue in self.clues[self.y]:
             print(clue)
+
+    def save(self, filename):
+        file = open(filename, 'w')
+        data = self.size, self.solution, self.clues
+        json.dump(data, file)
+        file.close()
+
+    def load(self, filename):
+        file = open(filename, 'r')
+        data = json.load(file)
+        self.size, self.solution, self.clues = data
+        file.close()
 
     def _set_solution_row(self, input_axis, row_index, solution_row):
         if input_axis == self.y:
