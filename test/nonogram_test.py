@@ -1,10 +1,10 @@
 import sys
 import os
-test_path = os.path.join(os.path.dirname(__file__), '../solver')
+test_path = os.path.join(os.path.dirname(__file__), '../')
 sys.path.insert(0, os.path.abspath(test_path))
 
 import unittest
-import nonogram
+import solver.nonogram as nonogram
 
 class TestNonogram(unittest.TestCase):
     def test_init(self):

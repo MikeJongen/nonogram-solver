@@ -1,4 +1,4 @@
-from nonogram import Nonogram
+from solver.nonogram import Nonogram
 
 class BasicSolver(Nonogram):
     """simple solver class
