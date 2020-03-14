@@ -54,6 +54,17 @@ class Nonogram:
         result = all(x != -1 for row in self.solution for x in row)
         return result
 
+    def percent_complete(self):
+        size = self.size[self.x] * self.size[self.y]
+        empty_elements = 0
+        for row in self.solution:
+            for element in row:
+                if element == -1:
+                    empty_elements += 1
+        filled_elements = size - empty_elements
+        percent_complete = (filled_elements / size) * 100
+        return percent_complete
+
     def print_solution(self):
         top_row = "+" + self.get_size_x() * "--+"
         print(top_row)

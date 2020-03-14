@@ -20,6 +20,23 @@ class TestNonogram(unittest.TestCase):
         new_nonogram = nonogram.Nonogram(5, 10)
         self.assertFalse(new_nonogram.is_complete())
 
+    def test_percentcomplete(self):
+        new_nonogram = nonogram.Nonogram(5, 10)
+        example_row = [1, 1, 1, 1, 1]
+        example_col = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        self.assertEqual(new_nonogram.percent_complete(), 0)
+        new_nonogram._set_solution_row(new_nonogram.x, 0, example_row)
+        self.assertEqual(new_nonogram.percent_complete(), 10.0)
+        new_nonogram._set_solution_row(new_nonogram.x, 1, example_row)
+        self.assertEqual(new_nonogram.percent_complete(), 20.0)
+        new_nonogram._set_solution_row(new_nonogram.y, 0, example_col)
+        self.assertEqual(new_nonogram.percent_complete(), 36.0)
+        new_nonogram._set_solution_row(new_nonogram.y, 1, example_col)
+        new_nonogram._set_solution_row(new_nonogram.y, 2, example_col)
+        new_nonogram._set_solution_row(new_nonogram.y, 3, example_col)
+        new_nonogram._set_solution_row(new_nonogram.y, 4, example_col)
+        self.assertEqual(new_nonogram.percent_complete(), 100.0)
+
     def test_legitimateinput(self):
         new_nonogram = nonogram.Nonogram(5, 10)
         clues_x = [[5], [4], [3], [2], [1],\
