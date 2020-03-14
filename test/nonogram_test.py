@@ -11,6 +11,22 @@ class TestNonogram(unittest.TestCase):
         new_nonogram = nonogram.Nonogram(5, 5)
         self.assertIsNotNone(new_nonogram)
 
+    def test_init_from_file(self):
+        new_nonogram = \
+                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+        expected_size = [5, 5]
+        expected_solution = [[1, 1, 1, 1, 1], \
+                             [0, 0, 0, 0, 0], \
+                             [1, 1, 1, 0, 1], \
+                             [1, 0, 1, 0, 1], \
+                             [0, 0, 1, 0, 0]]
+        expected_clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
+        expected_clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
+        expected_clues = [expected_clues_x, expected_clues_y]
+        self.assertEqual(expected_size, new_nonogram.size)
+        self.assertEqual(expected_solution, new_nonogram.solution)
+        self.assertEqual(expected_clues, new_nonogram.clues)
+
     def test_size(self):
         new_nonogram = nonogram.Nonogram(5, 10)
         self.assertEqual(new_nonogram.get_size_x(),  5)

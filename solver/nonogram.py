@@ -15,16 +15,21 @@ class Nonogram:
     x = axis["x"]
     y = axis["y"]
 
-    def __init__(self, size_x, size_y):
-        self.size = [0, 0]
-        self.size[self.x] = size_x
-        self.size[self.y] = size_y
+    def __init__(self, size_x=0, size_y=0, file=None):
+        if file == None:
+            # Create empty Nonogram
+            self.size = [0, 0]
+            self.size[self.x] = size_x
+            self.size[self.y] = size_y
 
-        self.solution = [[-1 for y in range(self.get_size_y())]\
-                             for x in range(self.get_size_x())]
-        self.clues = [0, 0]
-        self.clues[self.x] = [[] for x in range(self.get_size_y())]
-        self.clues[self.y] = [[] for y in range(self.get_size_x())]
+            self.solution = [[-1 for y in range(self.get_size_y())]\
+                                 for x in range(self.get_size_x())]
+            self.clues = [0, 0]
+            self.clues[self.x] = [[] for x in range(self.get_size_y())]
+            self.clues[self.y] = [[] for y in range(self.get_size_x())]
+        else:
+            # Load from file
+            self.load(file)
 
     def get_size_x(self):
         return self.size[self.x]
