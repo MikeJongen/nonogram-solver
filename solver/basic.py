@@ -5,6 +5,19 @@ class BasicSolver(Nonogram):
 
     First try at a solver class.
     """
+    def solver1(self):
+        """only solves rows/columns which have one possible solution"""
+        for index in range(self.size[self.y]):
+            try:
+                self.solve_defined_row("x", index)
+            except ValueError:
+                pass
+        for index in range(self.size[self.x]):
+            try:
+                self.solve_defined_row("y", index)
+            except ValueError:
+                pass
+
     def solve_defined_row(self, input_axis, index):
         """Solves a row/column that has only one possible solution"""
         cur_axis = self.axis[input_axis]
