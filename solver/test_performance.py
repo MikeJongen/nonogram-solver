@@ -18,6 +18,9 @@ def run_single_puzzle(puzzle):
     print("Solved: {}".format(bool(complete)))
     if complete == 0:
         print("Percentage: {:5.2f}%".format(puzzle.percent_complete()))
+    else:
+        correct = puzzle.is_correct()
+        print("Correct: {}".format(correct))
     print("Time = {:8.5f} ms".format(time / iterations * 1000))
 
 if __name__ == '__main__':
