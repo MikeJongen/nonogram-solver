@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.abspath(test_path))
 
 import unittest
 import solver.basic as basic
+from solver.error import *
 
 class TestBasic(unittest.TestCase):
     def test_solver1(self):
@@ -79,10 +80,10 @@ class TestBasic(unittest.TestCase):
         new_nonogram = basic.BasicSolver(5, 5)
         row1 = [1, 2, 3]
         row2 = [1, 2, 3, 4]
-        self.assertRaises(ValueError, \
+        self.assertRaises(LengthError, \
                           new_nonogram._get_matching_solution, \
                           row1, row2)
-        self.assertRaises(ValueError, \
+        self.assertRaises(LengthError, \
                           new_nonogram._get_matching_solution, \
                           row2, row1)
 

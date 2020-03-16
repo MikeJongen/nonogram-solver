@@ -1,4 +1,5 @@
 from solver.nonogram import Nonogram
+from solver.error import *
 
 class BasicSolver(Nonogram):
     """simple solver class
@@ -10,12 +11,12 @@ class BasicSolver(Nonogram):
         for index in range(self.size[self.y]):
             try:
                 self.solve_defined_row("x", index)
-            except ValueError:
+            except SolveError:
                 pass
         for index in range(self.size[self.x]):
             try:
                 self.solve_defined_row("y", index)
-            except ValueError:
+            except SolveError:
                 pass
 
     def solve_defined_row(self, input_axis, index):
@@ -35,7 +36,7 @@ class BasicSolver(Nonogram):
                 row_solution.append(-1)
             del row_solution[-1]
         else:
-            raise ValueError
+            raise SolveError
 
         self._set_solution_row(cur_axis, index, row_solution)
 
@@ -106,7 +107,7 @@ class BasicSolver(Nonogram):
 
     def _get_matching_solution(self, row1, row2):
         if len(row1) != len(row2):
-            raise ValueError
+            raise LengthError
         solution = []
         for value1, value2 in zip(row1, row2):
             if value1 == value2:

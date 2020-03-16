@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.abspath(test_path))
 
 import unittest
 import solver.nonogram as nonogram
+from solver.error import *
 
 class TestNonogram(unittest.TestCase):
     def test_init(self):
@@ -66,9 +67,9 @@ class TestNonogram(unittest.TestCase):
         clues_x = [[5], [4], [3], [2], [1],\
                    [1] ,[3, 1], [1, 1, 1], [1, 2]]
         clues_y = [[1, 1, 3], [3, 1], [5, 4], [2, 1, 1], [2, 2], [5]]
-        self.assertRaises(ValueError, \
+        self.assertRaises(LengthError, \
                           new_nonogram.set_clues_x, *clues_x)
-        self.assertRaises(ValueError, \
+        self.assertRaises(LengthError, \
                           new_nonogram.set_clues_y, *clues_y)
 
     def test_wronginputvalue(self):
@@ -76,9 +77,9 @@ class TestNonogram(unittest.TestCase):
         clues_x = [[6], [4], [3], [2], [1],\
                    [1] ,[3, 1], [1, 1, 1], [1, 2], [1]]
         clues_y = [[1, 1, 3, 3], [3, 1], [5, 4], [2, 1, 1], [2, 2]]
-        self.assertRaises(ValueError, \
+        self.assertRaises(ClueError, \
                           new_nonogram.set_clues_x, *clues_x)
-        self.assertRaises(ValueError, \
+        self.assertRaises(ClueError, \
                           new_nonogram.set_clues_y, *clues_y)
 
     def test_save(self):

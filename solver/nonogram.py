@@ -1,4 +1,5 @@
 import json
+from solver.error import *
 
 class Nonogram:
     """Main nonogram class
@@ -48,11 +49,11 @@ class Nonogram:
         other_axis = not cur_axis
 
         if len(clues) != self.size[other_axis]:
-            raise ValueError
+            raise LengthError
         for index, clue in enumerate(clues):
             min_length_clue = sum(clue) + len(clue) - 1
             if(min_length_clue > self.size[cur_axis]):
-                raise ValueError
+                raise ClueError
             self.clues[cur_axis][index] = clue
 
     def is_complete(self):
@@ -107,4 +108,4 @@ class Nonogram:
             for index, value in enumerate(solution_row):
                 self.solution[index][row_index] = value
         else:
-            raise ValueError
+            raise AxisError
