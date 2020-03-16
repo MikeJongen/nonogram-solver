@@ -124,5 +124,25 @@ class TestNonogram(unittest.TestCase):
         self.assertEqual(expected_solution, new_nonogram.solution)
         self.assertEqual(expected_clues, new_nonogram.clues)
 
+    def test_getsolutionrow(self):
+        new_nonogram = \
+                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+        row = new_nonogram._get_solution_row(new_nonogram.x, 1)
+        expected_row = [1, -1, 1, -1, -1]
+        self.assertEqual(expected_row, row)
+        column = new_nonogram._get_solution_row(new_nonogram.y, 3)
+        expected_column = [1, -1, 1, -1, 1]
+        self.assertEqual(expected_column, column)
+
+    def test_getcluesfromrow(self):
+        new_nonogram = \
+                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+        row_clues = new_nonogram._get_clues_from_row(new_nonogram.x, 2)
+        expected_row_clues = [1, 3]
+        self.assertEqual(expected_row_clues, row_clues)
+        col_clues = new_nonogram._get_clues_from_row(new_nonogram.y, 3)
+        expected_col_clues = [1, 1, 1]
+        self.assertEqual(expected_col_clues, col_clues)
+
 if __name__ == '__main__':
     unittest.main()

@@ -109,3 +109,29 @@ class Nonogram:
                 self.solution[index][row_index] = value
         else:
             raise AxisError
+
+    def _get_solution_row(self, input_axis, row_index):
+        if input_axis == self.y:
+            row =  self.solution[row_index]
+            return row
+        elif input_axis == self.x:
+            row = []
+            for index, value in enumerate(self.solution):
+                row.append(self.solution[index][row_index])
+            return row
+        else:
+            raise AxisError
+
+    def _get_clues_from_row(self, input_axis, row_index):
+        row = self._get_solution_row(input_axis, row_index)
+        clues = []
+        current_clue = 0
+        for element in row:
+            if element == 1:
+                current_clue += 1
+            elif current_clue != 0:
+                clues.append(current_clue)
+                current_clue = 0
+        if current_clue != 0:
+            clues.append(current_clue)
+        return clues
