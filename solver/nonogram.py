@@ -113,14 +113,28 @@ class Nonogram:
         self.size, self.solution, self.clues = data
         file.close()
 
-    def _set_solution_row(self, input_axis, row_index, solution_row):
+    def _set_solution_row(self, input_axis, row_index, solution_row, \
+                          forced=1):
         if input_axis == self.y:
-            self.solution[row_index] = solution_row
+            for index, value in enumerate(solution_row):
+                self._set_solution_value(row_index, index, value, \
+                                         forced)
         elif input_axis == self.x:
             for index, value in enumerate(solution_row):
-                self.solution[index][row_index] = value
+                self._set_solution_value(index, row_index, value, \
+                                         forced)
         else:
             raise AxisError
+
+    def _set_solution_value(self, x, y, new, forced=0):
+        value = self.solution[x][y]
+        if forced:
+            self.solution[x][y] = new
+        else:
+            if value == 0:
+                self.solution[x][y] = new
+            elif ((value, new) == (-1, 1)) or ((value, new) == (1, -1)):
+                raise SetSolutionError
 
     def _get_solution_row(self, input_axis, row_index):
         if input_axis == self.y:

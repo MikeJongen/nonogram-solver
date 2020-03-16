@@ -17,3 +17,7 @@ class ClueError(NonogramError):
 class SolveError(NonogramError):
     """Exception raised for when solve action cannot be executed."""
     pass
+
+class SetSolutionError(NonogramError):
+    """Exception raised for an invalid change of the solution."""
+    pass

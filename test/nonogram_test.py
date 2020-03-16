@@ -131,6 +131,55 @@ class TestNonogram(unittest.TestCase):
         self.assertEqual(expected_solution, new_nonogram.solution)
         self.assertEqual(expected_clues, new_nonogram.clues)
 
+    def test_setsolutionrow(self):
+        new_nonogram = \
+            nonogram.Nonogram(file="puzzles/test/nonogram_halfdone.txt")
+        test_column = [1, -1, 0, -1, 1]
+        new_nonogram._set_solution_row(new_nonogram.y, 2, test_column)
+        new_column = new_nonogram._get_solution_row(new_nonogram.y, 2)
+        self.assertEqual(new_column, test_column)
+        test_row = [-1, 1, 0, -1, 1]
+        new_nonogram._set_solution_row(new_nonogram.x, 0, test_row, 1)
+        new_row = new_nonogram._get_solution_row(new_nonogram.x, 0)
+        self.assertEqual(new_row, test_row)
+
+    def test_setsolutionvalue(self):
+        new_nonogram = \
+            nonogram.Nonogram(file="puzzles/test/nonogram_halfdone.txt")
+        new_nonogram._set_solution_value(0, 0, 1)
+        self.assertEqual(new_nonogram.solution[0][0], 1)
+        new_nonogram._set_solution_value(0, 1, 0)
+        self.assertEqual(new_nonogram.solution[0][1], 1)
+        new_nonogram._set_solution_value(1, 2, 0)
+        self.assertEqual(new_nonogram.solution[1][2], -1)
+        new_nonogram._set_solution_value(1, 3, -1)
+        self.assertEqual(new_nonogram.solution[1][3], -1)
+        new_nonogram._set_solution_value(2, 0, 1)
+        self.assertEqual(new_nonogram.solution[2][0], 1)
+        new_nonogram._set_solution_value(2, 1, 0)
+        self.assertEqual(new_nonogram.solution[2][1], 0)
+        new_nonogram._set_solution_value(2, 2, -1)
+        self.assertEqual(new_nonogram.solution[2][2], -1)
+
+    def test_setsolutionvalueerror(self):
+        new_nonogram = \
+            nonogram.Nonogram(file="puzzles/test/nonogram_halfdone.txt")
+        self.assertRaises(SetSolutionError, \
+                new_nonogram._set_solution_value, 0, 2, -1)
+        self.assertEqual(new_nonogram.solution[0][2], 1)
+        self.assertRaises(SetSolutionError, \
+                new_nonogram._set_solution_value, 1, 2, 1)
+        self.assertEqual(new_nonogram.solution[1][2], -1)
+
+    def test_setsolutionvalueforced(self):
+        new_nonogram = \
+            nonogram.Nonogram(file="puzzles/test/nonogram_halfdone.txt")
+        new_nonogram._set_solution_value(0, 2, -1, 1)
+        self.assertEqual(new_nonogram.solution[0][2], -1)
+        new_nonogram._set_solution_value(1, 2, 1, 1)
+        self.assertEqual(new_nonogram.solution[1][2], 1)
+
+
     def test_getsolutionrow(self):
         new_nonogram = \
                 nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
