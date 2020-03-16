@@ -15,11 +15,11 @@ class TestNonogram(unittest.TestCase):
         new_nonogram = \
                 nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
         expected_size = [5, 5]
-        expected_solution = [[1, 1, 1, 1, 1], \
-                             [0, 0, 0, 0, 0], \
-                             [1, 1, 1, 0, 1], \
-                             [1, 0, 1, 0, 1], \
-                             [0, 0, 1, 0, 0]]
+        expected_solution = [[ 1,  1,  1,  1,  1], \
+                             [-1, -1, -1, -1, -1], \
+                             [ 1,  1,  1, -1,  1], \
+                             [ 1, -1,  1, -1,  1], \
+                             [-1, -1,  1, -1, -1]]
         expected_clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
         expected_clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
         expected_clues = [expected_clues_x, expected_clues_y]
@@ -87,18 +87,18 @@ class TestNonogram(unittest.TestCase):
         clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
         new_nonogram.set_clues_x(*clues_x)
         new_nonogram.set_clues_y(*clues_y)
-        new_nonogram.solution = [[1, 1, 1, 1, 1], \
-                                 [0, 0, 0, 0, 0], \
-                                 [1, 1, 1, 0, 1], \
-                                 [1, 0, 1, 0, 1], \
-                                 [0, 0, 1, 0, 0]]
+        new_nonogram.solution = [[ 1,  1,  1,  1,  1], \
+                                 [-1, -1, -1, -1, -1], \
+                                 [ 1,  1,  1, -1,  1], \
+                                 [ 1, -1,  1, -1,  1], \
+                                 [-1, -1,  1, -1, -1]]
         new_nonogram.save("puzzles/test/temp.txt")
         expected_savefile = "[[5, 5], "
         expected_savefile += "[[1, 1, 1, 1, 1],"
-        expected_savefile += " [0, 0, 0, 0, 0],"
-        expected_savefile += " [1, 1, 1, 0, 1],"
-        expected_savefile += " [1, 0, 1, 0, 1],"
-        expected_savefile += " [0, 0, 1, 0, 0]], "
+        expected_savefile += " [-1, -1, -1, -1, -1],"
+        expected_savefile += " [1, 1, 1, -1, 1],"
+        expected_savefile += " [1, -1, 1, -1, 1],"
+        expected_savefile += " [-1, -1, 1, -1, -1]], "
         expected_savefile += "[[[1, 2], [1, 1], [1, 3], [1], [1, 2]],"
         expected_savefile += " [[5], [], [3, 1], [1, 1, 1], [1]]]]"
         f = open("puzzles/test/temp.txt", "r")
@@ -111,11 +111,11 @@ class TestNonogram(unittest.TestCase):
         new_nonogram = nonogram.Nonogram(5, 5)
         new_nonogram.load("puzzles/test/nonogram_load.txt")
         expected_size = [5, 5]
-        expected_solution = [[1, 1, 1, 1, 1], \
-                             [0, 0, 0, 0, 0], \
-                             [1, 1, 1, 0, 1], \
-                             [1, 0, 1, 0, 1], \
-                             [0, 0, 1, 0, 0]]
+        expected_solution = [[ 1,  1,  1,  1,  1], \
+                             [-1, -1, -1, -1, -1], \
+                             [ 1,  1,  1, -1,  1], \
+                             [ 1, -1,  1, -1,  1], \
+                             [-1, -1,  1, -1, -1]]
         expected_clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
         expected_clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
         expected_clues = [expected_clues_x, expected_clues_y]

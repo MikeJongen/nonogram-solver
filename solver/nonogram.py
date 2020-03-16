@@ -6,8 +6,8 @@ class Nonogram:
     Used to hold the data of the nonogram.
     also has some basic creation and helper functions
     """
-    printable_values = {-1: "  ",
-                         0: "..",
+    printable_values = { 0: "  ",
+                        -1: "..",
                          1: "XX"}
     axis = {"x": 0,
             "y": 1}
@@ -22,7 +22,7 @@ class Nonogram:
             self.size[self.x] = size_x
             self.size[self.y] = size_y
 
-            self.solution = [[-1 for y in range(self.get_size_y())]\
+            self.solution = [[0 for y in range(self.get_size_y())]\
                                  for x in range(self.get_size_x())]
             self.clues = [0, 0]
             self.clues[self.x] = [[] for x in range(self.get_size_y())]
@@ -56,7 +56,7 @@ class Nonogram:
             self.clues[cur_axis][index] = clue
 
     def is_complete(self):
-        result = all(x != -1 for row in self.solution for x in row)
+        result = all(x != 0 for row in self.solution for x in row)
         return result
 
     def percent_complete(self):
@@ -64,7 +64,7 @@ class Nonogram:
         empty_elements = 0
         for row in self.solution:
             for element in row:
-                if element == -1:
+                if element == 0:
                     empty_elements += 1
         filled_elements = size - empty_elements
         percent_complete = (filled_elements / size) * 100

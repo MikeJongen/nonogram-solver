@@ -26,13 +26,13 @@ class BasicSolver(Nonogram):
 
         if cur_clue == []:
             # empty row
-            row_solution = [0 for i in range(self.size[cur_axis])]
+            row_solution = [-1 for i in range(self.size[cur_axis])]
         elif length_clue == self.size[cur_axis]:
             # clue fills entire row
             row_solution = []
             for block in cur_clue:
                 row_solution.extend([1 for i in range(block)])
-                row_solution.append(0)
+                row_solution.append(-1)
             del row_solution[-1]
         else:
             raise ValueError
@@ -63,7 +63,7 @@ class BasicSolver(Nonogram):
         if len(clue) == 0:
             solution = []
             for i in range(size):
-                solution.append(0)
+                solution.append(-1)
             total.append(solution)
             return total
         elif len(clue) == 1:
@@ -71,11 +71,11 @@ class BasicSolver(Nonogram):
             for solution_no in range(no_solutions):
                 solution = start[:]
                 for i in range(solution_no):
-                    solution.append(0)
+                    solution.append(-1)
                 for i in range(clue[0]):
                     solution.append(1)
                 for i in range(size - clue[0] - solution_no):
-                    solution.append(0)
+                    solution.append(-1)
                 total.append(solution)
             return total
         else:
@@ -83,10 +83,10 @@ class BasicSolver(Nonogram):
             for solution_no in range(no_solutions):
                 solution = start[:]
                 for i in range(solution_no):
-                    solution.append(0)
+                    solution.append(-1)
                 for i in range(clue[0]):
                     solution.append(1)
-                solution.append(0)
+                solution.append(-1)
                 new_size = size - clue[0] - solution_no - 1
                 total = self._list_of_solutions(total, solution, \
                                                 clue[1:], new_size)
@@ -112,5 +112,5 @@ class BasicSolver(Nonogram):
             if value1 == value2:
                 solution.append(value1)
             else:
-                solution.append(-1)
+                solution.append(0)
         return solution
