@@ -54,6 +54,13 @@ class TestNonogram(unittest.TestCase):
         new_nonogram._set_solution_row(new_nonogram.y, 4, example_col)
         self.assertEqual(new_nonogram.percent_complete(), 100.0)
 
+    def test_iscorrect(self):
+        new_nonogram = \
+                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+        self.assertTrue(new_nonogram.is_correct())
+        new_nonogram.solution[0][0] = -1
+        self.assertFalse(new_nonogram.is_correct())
+
     def test_legitimateinput(self):
         new_nonogram = nonogram.Nonogram(5, 10)
         clues_x = [[5], [4], [3], [2], [1],\

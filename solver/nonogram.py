@@ -71,6 +71,18 @@ class Nonogram:
         percent_complete = (filled_elements / size) * 100
         return percent_complete
 
+    def is_correct(self):
+        correct = True
+        for row_index in range(self.get_size_y()):
+            derived_clue = self._get_clues_from_row(self.x, row_index)
+            if derived_clue != self.clues[self.x][row_index]:
+                correct = False
+        for col_index in range(self.get_size_x()):
+            derived_clue = self._get_clues_from_row(self.y, col_index)
+            if derived_clue != self.clues[self.y][col_index]:
+                correct = False
+        return correct
+
     def print_solution(self):
         top_row = "+" + self.get_size_x() * "--+"
         print(top_row)
