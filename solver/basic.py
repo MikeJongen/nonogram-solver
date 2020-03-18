@@ -40,6 +40,17 @@ class BasicSolver(Nonogram):
 
         self._set_solution_row(cur_axis, index, row_solution)
 
+    def fill_common_elements_row(self, input_axis, index):
+        """Fills all elements which are common for all solutions"""
+        cur_axis = self.axis[input_axis]
+        all_solutions = self.get_all_solutions(input_axis, index)
+        row_solution = all_solutions[0]
+
+        for solution in all_solutions:
+            row_solution = self._get_matching_solution(solution, \
+                                                       row_solution)
+        self._set_solution_row(cur_axis, index, row_solution)
+
     def get_number_of_solutions_total(self, input_axis, index):
         """Returns the number of possible solutions for the row"""
         cur_axis = self.axis[input_axis]

@@ -62,6 +62,30 @@ class TestBasic(unittest.TestCase):
                              [1, -1,  1,  1,  1]]
         self.assertEqual(new_nonogram.solution, expected_solution)
 
+    def test_fillcommonelementsrow(self):
+        new_nonogram = basic.BasicSolver(10, 5)
+        clues_y = [[4], [2, 2], [5], [5], [2, 1],\
+                   [5] ,[1, 1], [1, 1], [2, 1], [2, 1]]
+        clues_x = [[8], [6, 2], [1, 2, 2, 1], [6], [4, 1, 3]]
+        new_nonogram.set_clues_x(*clues_x)
+        new_nonogram.set_clues_y(*clues_y)
+        new_nonogram.fill_common_elements_row('x', 0)
+        new_nonogram.fill_common_elements_row('x', 1)
+        new_nonogram.fill_common_elements_row('x', 2)
+        new_nonogram.fill_common_elements_row('x', 3)
+        new_nonogram.fill_common_elements_row('x', 4)
+        expected_solution = [[0,  0,  0,  0,  1], \
+                             [0,  1,  0,  0,  1], \
+                             [1,  1,  0,  0,  1], \
+                             [1,  1,  1,  0,  1], \
+                             [1,  1,  0,  1, -1], \
+                             [1,  1,  0,  1,  1], \
+                             [1,  0,  1,  0, -1], \
+                             [1,  0,  0,  0,  1], \
+                             [0,  1,  0,  0,  1], \
+                             [0,  0,  0,  0,  1]]
+        self.assertEqual(new_nonogram.solution, expected_solution)
+
     def test_number_of_solutions(self):
         new_nonogram = basic.BasicSolver(5, 10)
         clues_x = [[1, 3], [1, 1], [1, 2], [1, 1], [1, 1],\
