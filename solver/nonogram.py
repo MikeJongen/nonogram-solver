@@ -153,7 +153,7 @@ class Nonogram:
         sets row/column to new value.
 
         solution_row : list
-            list of int with new values. 
+            list of int with new values.
         forced : bool
             if True, overwrite old values.
         """
@@ -170,7 +170,7 @@ class Nonogram:
 
     def _set_solution_value(self, x, y, new, forced=False):
         """
-        Sets the value of cell [x, y] to new. 
+        Sets the value of cell [x, y] to new.
         Only sets value if previous value was empty (unless forced == True).
         """
         value = self.solution[x][y]
@@ -244,3 +244,10 @@ class Row:
         if current_clue != 0:
             clues.append(current_clue)
         return clues
+
+    def is_complete(self):
+        """
+        Checks if row is completely filled in (no unknown values left)
+        """
+        result = all(value != 0 for value in self.values)
+        return result

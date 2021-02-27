@@ -18,3 +18,11 @@ class TestRow(unittest.TestCase):
         row = nonogram.Row(original_clues, [1, 1, 1, 1, 1, -1, 1, 1, 1, 1])
         new_clues = row._reconstruct_clues()
         self.assertEqual(new_clues, original_clues)
+
+    def test_is_complete(self):
+        row = nonogram.Row([5, 4], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        self.assertFalse(row.is_complete())
+        row.values = [1, 1, 1, 1, 0, -1, 1, 1, 1, 1]
+        self.assertFalse(row.is_complete())
+        row.values = [1, 1, 1, 1, 1, -1, 1, 1, 1, 1]
+        self.assertTrue(row.is_complete())
