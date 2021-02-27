@@ -215,3 +215,15 @@ class Nonogram:
         if current_clue != 0:
             clues.append(current_clue)
         return clues
+
+
+class Row:
+    """
+    Support class
+
+    used for data/function for a single row/column
+    """
+
+    def __init__(self, clues, values):
+        self.clues = clues
+        self.values = values
