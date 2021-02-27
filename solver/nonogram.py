@@ -18,6 +18,9 @@ class Nonogram:
     y = axis["y"]
 
     def __init__(self, size_x=0, size_y=0, file=None):
+        """
+        Initializes using file or puzzle size
+        """
         if file == None:
             # Create empty Nonogram
             self.size = [0, 0]
@@ -40,12 +43,33 @@ class Nonogram:
         return self.size[self.y]
 
     def set_clues_x(self, *clues):
+        """
+        Sets clues of for the rows
+
+        *clues : list
+            list of clues, where every clue is a list of ints
+        """
         return self.set_clues("x", *clues)
 
     def set_clues_y(self, *clues):
+        """
+        Sets clues of for the columns
+
+        *clues : list
+            list of clues, where every clue is a list of ints
+        """
         return self.set_clues("y", *clues)
 
     def set_clues(self, input_axis, *clues):
+        """
+        Sets clues
+
+        input_axis : string
+            "x" if clues are for rows
+            "y" if clues are for columns
+        *clues : list
+            list of clues, where every clue is a list of ints
+        """
         cur_axis = self.axis[input_axis]
         other_axis = not cur_axis
 
@@ -57,11 +81,17 @@ class Nonogram:
                 raise ClueError
             self.clues[cur_axis][index] = clue
 
-    def is_complete(self):
+    def is_complete(self) -> bool:
+        """
+        Checks if puzzle is completely filled in (no unknown values left)
+        """
         result = all(x != 0 for row in self.solution for x in row)
         return result
 
-    def percent_complete(self):
+    def percent_complete(self) -> float:
+        """
+        Returns percentage filled in cells / total cells
+        """
         size = self.size[self.x] * self.size[self.y]
         empty_elements = 0
         for row in self.solution:
@@ -72,7 +102,10 @@ class Nonogram:
         percent_complete = (filled_elements / size) * 100
         return percent_complete
 
-    def is_correct(self):
+    def is_correct(self) -> bool:
+        """
+        Checks if puzzle solution fits the clues
+        """
         correct = True
         for row_index in range(self.get_size_y()):
             derived_clue = self._get_clues_from_row(self.x, row_index)
@@ -115,7 +148,15 @@ class Nonogram:
         file.close()
 
     def _set_solution_row(self, input_axis, row_index, solution_row,
-                          forced=1):
+                          forced=True):
+        """
+        sets row/column to new value.
+
+        solution_row : list
+            list of int with new values. 
+        forced : bool
+            if True, overwrite old values.
+        """
         if input_axis == self.y:
             for index, value in enumerate(solution_row):
                 self._set_solution_value(row_index, index, value,
@@ -127,7 +168,11 @@ class Nonogram:
         else:
             raise AxisError
 
-    def _set_solution_value(self, x, y, new, forced=0):
+    def _set_solution_value(self, x, y, new, forced=False):
+        """
+        Sets the value of cell [x, y] to new. 
+        Only sets value if previous value was empty (unless forced == True).
+        """
         value = self.solution[x][y]
         if forced:
             self.solution[x][y] = new
@@ -137,19 +182,25 @@ class Nonogram:
             elif ((value, new) == (-1, 1)) or ((value, new) == (1, -1)):
                 raise SetSolutionError
 
-    def _get_solution_row(self, input_axis, row_index):
+    def _get_solution_row(self, input_axis, row_index) -> list:
+        """
+        Get a row/column of the solution
+        """
         if input_axis == self.y:
             row = self.solution[row_index]
             return row
         elif input_axis == self.x:
             row = []
-            for index, value in enumerate(self.solution):
-                row.append(self.solution[index][row_index])
+            for value in self.solution:
+                row.append(value[row_index])
             return row
         else:
             raise AxisError
 
-    def _get_clues_from_row(self, input_axis, row_index):
+    def _get_clues_from_row(self, input_axis, row_index) -> list:
+        """
+        Get clue list, created from the current state of the solution
+        """
         row = self._get_solution_row(input_axis, row_index)
         clues = []
         current_clue = 0
