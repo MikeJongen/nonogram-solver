@@ -184,10 +184,12 @@ class Nonogram:
 
     def _get_solution_row(self, input_axis, row_index) -> list:
         """
-        Get a row/column of the solution
+        Get a copy of a row/column of the solution
         """
         if input_axis == self.y:
-            row = self.solution[row_index]
+            row = []
+            for value in self.solution[row_index]:
+                row.append(value)
             return row
         elif input_axis == self.x:
             row = []

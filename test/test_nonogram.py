@@ -199,6 +199,26 @@ class TestNonogram(unittest.TestCase):
         expected_col_clues = [1, 1, 1]
         self.assertEqual(expected_col_clues, col_clues)
 
+    def test_getsolutionrowcopy(self):
+        """
+        Make sure _get_solution_row returns a copy, and adjusting this does not 
+        change the original solution.
+        """
+        new_nonogram = \
+            nonogram.Nonogram(file="puzzles/test/basic_solver1.txt")
+        expected_solution = [[0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0]]
+        row1 = new_nonogram._get_solution_row(0, 1)
+        row2 = new_nonogram._get_solution_row(1, 3)
+        row1[0] = 1
+        row1[3] = 1
+        row2[1] = 1
+        row2[4] = 1
+        self.assertEqual(new_nonogram.solution, expected_solution)
+
 
 if __name__ == '__main__':
     unittest.main()
