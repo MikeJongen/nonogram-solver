@@ -227,3 +227,20 @@ class Row:
     def __init__(self, clues, values):
         self.clues = clues
         self.values = values
+
+    def _reconstruct_clues(self) -> list:
+        """
+        Get clue list, created from the current state of the row
+        Interprets empty cells as blank
+        """
+        clues = []
+        current_clue = 0
+        for element in self.values:
+            if element == 1:
+                current_clue += 1
+            elif current_clue != 0:
+                clues.append(current_clue)
+                current_clue = 0
+        if current_clue != 0:
+            clues.append(current_clue)
+        return clues
