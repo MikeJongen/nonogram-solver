@@ -1,11 +1,11 @@
+from solver.error import *
+import solver.nonogram as nonogram
+import unittest
 import sys
 import os
 test_path = os.path.join(os.path.dirname(__file__), '../')
 sys.path.insert(0, os.path.abspath(test_path))
 
-import unittest
-import solver.nonogram as nonogram
-from solver.error import *
 
 class TestNonogram(unittest.TestCase):
     def test_init(self):
@@ -14,12 +14,12 @@ class TestNonogram(unittest.TestCase):
 
     def test_init_from_file(self):
         new_nonogram = \
-                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+            nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
         expected_size = [5, 5]
-        expected_solution = [[ 1,  1,  1,  1,  1], \
-                             [-1, -1, -1, -1, -1], \
-                             [ 1,  1,  1, -1,  1], \
-                             [ 1, -1,  1, -1,  1], \
+        expected_solution = [[1,  1,  1,  1,  1],
+                             [-1, -1, -1, -1, -1],
+                             [1,  1,  1, -1,  1],
+                             [1, -1,  1, -1,  1],
                              [-1, -1,  1, -1, -1]]
         expected_clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
         expected_clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
@@ -56,37 +56,37 @@ class TestNonogram(unittest.TestCase):
 
     def test_iscorrect(self):
         new_nonogram = \
-                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+            nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
         self.assertTrue(new_nonogram.is_correct())
         new_nonogram.solution[0][0] = -1
         self.assertFalse(new_nonogram.is_correct())
 
     def test_legitimateinput(self):
         new_nonogram = nonogram.Nonogram(5, 10)
-        clues_x = [[5], [4], [3], [2], [1],\
-                   [1] ,[3, 1], [1, 1, 1], [1, 2], [1]]
+        clues_x = [[5], [4], [3], [2], [1],
+                   [1], [3, 1], [1, 1, 1], [1, 2], [1]]
         clues_y = [[1, 1, 3], [3, 1], [5, 4], [2, 1, 1], [2, 2]]
         new_nonogram.set_clues_x(*clues_x)
         new_nonogram.set_clues_y(*clues_y)
 
     def test_wrongnumberofinputs(self):
         new_nonogram = nonogram.Nonogram(5, 10)
-        clues_x = [[5], [4], [3], [2], [1],\
-                   [1] ,[3, 1], [1, 1, 1], [1, 2]]
+        clues_x = [[5], [4], [3], [2], [1],
+                   [1], [3, 1], [1, 1, 1], [1, 2]]
         clues_y = [[1, 1, 3], [3, 1], [5, 4], [2, 1, 1], [2, 2], [5]]
-        self.assertRaises(LengthError, \
+        self.assertRaises(LengthError,
                           new_nonogram.set_clues_x, *clues_x)
-        self.assertRaises(LengthError, \
+        self.assertRaises(LengthError,
                           new_nonogram.set_clues_y, *clues_y)
 
     def test_wronginputvalue(self):
         new_nonogram = nonogram.Nonogram(5, 10)
-        clues_x = [[6], [4], [3], [2], [1],\
-                   [1] ,[3, 1], [1, 1, 1], [1, 2], [1]]
+        clues_x = [[6], [4], [3], [2], [1],
+                   [1], [3, 1], [1, 1, 1], [1, 2], [1]]
         clues_y = [[1, 1, 3, 3], [3, 1], [5, 4], [2, 1, 1], [2, 2]]
-        self.assertRaises(ClueError, \
+        self.assertRaises(ClueError,
                           new_nonogram.set_clues_x, *clues_x)
-        self.assertRaises(ClueError, \
+        self.assertRaises(ClueError,
                           new_nonogram.set_clues_y, *clues_y)
 
     def test_save(self):
@@ -95,10 +95,10 @@ class TestNonogram(unittest.TestCase):
         clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
         new_nonogram.set_clues_x(*clues_x)
         new_nonogram.set_clues_y(*clues_y)
-        new_nonogram.solution = [[ 1,  1,  1,  1,  1], \
-                                 [-1, -1, -1, -1, -1], \
-                                 [ 1,  1,  1, -1,  1], \
-                                 [ 1, -1,  1, -1,  1], \
+        new_nonogram.solution = [[1,  1,  1,  1,  1],
+                                 [-1, -1, -1, -1, -1],
+                                 [1,  1,  1, -1,  1],
+                                 [1, -1,  1, -1,  1],
                                  [-1, -1,  1, -1, -1]]
         new_nonogram.save("puzzles/test/temp.txt")
         expected_savefile = "[[5, 5], "
@@ -119,10 +119,10 @@ class TestNonogram(unittest.TestCase):
         new_nonogram = nonogram.Nonogram(5, 5)
         new_nonogram.load("puzzles/test/nonogram_load.txt")
         expected_size = [5, 5]
-        expected_solution = [[ 1,  1,  1,  1,  1], \
-                             [-1, -1, -1, -1, -1], \
-                             [ 1,  1,  1, -1,  1], \
-                             [ 1, -1,  1, -1,  1], \
+        expected_solution = [[1,  1,  1,  1,  1],
+                             [-1, -1, -1, -1, -1],
+                             [1,  1,  1, -1,  1],
+                             [1, -1,  1, -1,  1],
                              [-1, -1,  1, -1, -1]]
         expected_clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
         expected_clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
@@ -164,11 +164,11 @@ class TestNonogram(unittest.TestCase):
     def test_setsolutionvalueerror(self):
         new_nonogram = \
             nonogram.Nonogram(file="puzzles/test/nonogram_halfdone.txt")
-        self.assertRaises(SetSolutionError, \
-                new_nonogram._set_solution_value, 0, 2, -1)
+        self.assertRaises(SetSolutionError,
+                          new_nonogram._set_solution_value, 0, 2, -1)
         self.assertEqual(new_nonogram.solution[0][2], 1)
-        self.assertRaises(SetSolutionError, \
-                new_nonogram._set_solution_value, 1, 2, 1)
+        self.assertRaises(SetSolutionError,
+                          new_nonogram._set_solution_value, 1, 2, 1)
         self.assertEqual(new_nonogram.solution[1][2], -1)
 
     def test_setsolutionvalueforced(self):
@@ -179,10 +179,9 @@ class TestNonogram(unittest.TestCase):
         new_nonogram._set_solution_value(1, 2, 1, 1)
         self.assertEqual(new_nonogram.solution[1][2], 1)
 
-
     def test_getsolutionrow(self):
         new_nonogram = \
-                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+            nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
         row = new_nonogram._get_solution_row(new_nonogram.x, 1)
         expected_row = [1, -1, 1, -1, -1]
         self.assertEqual(expected_row, row)
@@ -192,13 +191,14 @@ class TestNonogram(unittest.TestCase):
 
     def test_getcluesfromrow(self):
         new_nonogram = \
-                nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+            nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
         row_clues = new_nonogram._get_clues_from_row(new_nonogram.x, 2)
         expected_row_clues = [1, 3]
         self.assertEqual(expected_row_clues, row_clues)
         col_clues = new_nonogram._get_clues_from_row(new_nonogram.y, 3)
         expected_col_clues = [1, 1, 1]
         self.assertEqual(expected_col_clues, col_clues)
+
 
 if __name__ == '__main__':
     unittest.main()
