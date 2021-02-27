@@ -1,15 +1,16 @@
 import json
 from solver.error import *
 
+
 class Nonogram:
     """Main nonogram class
 
     Used to hold the data of the nonogram.
     also has some basic creation and helper functions
     """
-    printable_values = { 0: "  ",
+    printable_values = {0: "  ",
                         -1: "..",
-                         1: "XX"}
+                        1: "XX"}
     axis = {"x": 0,
             "y": 1}
 
@@ -23,8 +24,8 @@ class Nonogram:
             self.size[self.x] = size_x
             self.size[self.y] = size_y
 
-            self.solution = [[0 for y in range(self.get_size_y())]\
-                                 for x in range(self.get_size_x())]
+            self.solution = [[0 for y in range(self.get_size_y())]
+                             for x in range(self.get_size_x())]
             self.clues = [0, 0]
             self.clues[self.x] = [[] for x in range(self.get_size_y())]
             self.clues[self.y] = [[] for y in range(self.get_size_x())]
@@ -113,15 +114,15 @@ class Nonogram:
         self.size, self.solution, self.clues = data
         file.close()
 
-    def _set_solution_row(self, input_axis, row_index, solution_row, \
+    def _set_solution_row(self, input_axis, row_index, solution_row,
                           forced=1):
         if input_axis == self.y:
             for index, value in enumerate(solution_row):
-                self._set_solution_value(row_index, index, value, \
+                self._set_solution_value(row_index, index, value,
                                          forced)
         elif input_axis == self.x:
             for index, value in enumerate(solution_row):
-                self._set_solution_value(index, row_index, value, \
+                self._set_solution_value(index, row_index, value,
                                          forced)
         else:
             raise AxisError
@@ -138,7 +139,7 @@ class Nonogram:
 
     def _get_solution_row(self, input_axis, row_index):
         if input_axis == self.y:
-            row =  self.solution[row_index]
+            row = self.solution[row_index]
             return row
         elif input_axis == self.x:
             row = []
