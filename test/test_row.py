@@ -26,3 +26,11 @@ class TestRow(unittest.TestCase):
         self.assertFalse(row.is_complete())
         row.values = [1, 1, 1, 1, 1, -1, 1, 1, 1, 1]
         self.assertTrue(row.is_complete())
+
+    def test_is_correct(self):
+        row = nonogram.Row([5, 4], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        self.assertFalse(row.is_correct())
+        row.values = [1, 1, 1, 1, -1, -1, 1, 1, 1, 1]
+        self.assertFalse(row.is_correct())
+        row.values = [1, 1, 1, 1, 1, -1, 1, 1, 1, 1]
+        self.assertTrue(row.is_correct())

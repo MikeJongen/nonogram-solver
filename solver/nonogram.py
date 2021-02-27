@@ -245,9 +245,21 @@ class Row:
             clues.append(current_clue)
         return clues
 
-    def is_complete(self):
+    def is_complete(self) -> bool:
         """
         Checks if row is completely filled in (no unknown values left)
         """
         result = all(value != 0 for value in self.values)
         return result
+
+    def is_correct(self) -> bool:
+        """
+        Checks if row solution fits the clues
+        Non complete solution is interpreted as incorrect 
+        """
+        if not self.is_complete():
+            return False
+        reconstructed_clue = self._reconstruct_clues()
+        if reconstructed_clue != self.clues:
+            return False
+        return True
