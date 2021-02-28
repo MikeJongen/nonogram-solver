@@ -31,6 +31,11 @@ class TestPerformance(unittest.TestCase):
         test.run_timing_test("puzzles/test/basic_solver1.txt")
         self.assertIn("puzzles/test/basic_solver1.txt", test.timing_results)
 
+    def test_test_runner_correct_test(self):
+        test = performance.Test_Runner(basic.BasicSolver)
+        test.run_correctness_test("puzzles/test/basic_solver1.txt")
+        self.assertIn("puzzles/test/basic_solver1.txt", test.correct_results)
+
 
 if __name__ == '__main__':
     unittest.main()
