@@ -26,6 +26,11 @@ class TestPerformance(unittest.TestCase):
         pair = test.solver.get_clue_solution_pair("y", 3)
         self.assertEqual(pair, ([1, 1, 1], [1, -1, 1, -1, 1]))
 
+    def test_test_runner_timing_test(self):
+        test = performance.Test_Runner(basic.BasicSolver)
+        test.run_timing_test("puzzles/test/basic_solver1.txt")
+        self.assertIn("puzzles/test/basic_solver1.txt", test.timing_results)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -16,6 +16,29 @@ class Performance_Test:
         self.solver.solver1()
 
 
+class Test_Runner:
+    def __init__(self, solver_class):
+        self.solver = solver_class
+        self.timing_results = dict()
+
+    def run_timing_test(self, puzzle):
+        setup = ("from solver.test_performance import Performance_Test\n"
+                 "import solver\n"
+                 "test = Performance_Test("
+                 + self.solver.__module__ + "." + self.solver.__name__ +
+                 ", "
+                 "\"" + puzzle + "\""
+                 ")")
+        iterations = 10000
+        time = timeit.timeit("test.run()",
+                             setup=setup,
+                             number=iterations)
+        self.timing_results[puzzle] = time / iterations * 1000
+
+    def print_timing(self, puzzle):
+        print("Time = {:8.5f} ms".format(self.timing_results[puzzle]))
+
+
 def run():
     puzzle.reset_solution()
     puzzle.solver1()
