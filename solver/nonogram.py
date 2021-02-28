@@ -124,6 +124,10 @@ class Nonogram:
                 correct = False
         return correct
 
+    def reset_solution(self):
+        self.solution = [[0 for y in range(self.get_size_y())]
+                         for x in range(self.get_size_x())]
+
     def print_solution(self):
         top_row = "+" + self.get_size_x() * "--+"
         print(top_row)

@@ -218,6 +218,17 @@ class TestNonogram(unittest.TestCase):
         pair = new_nonogram.get_clue_solution_pair("y", 1)
         self.assertEqual(pair, ([], [-1, -1, -1, -1, -1]))
 
+    def test_reset(self):
+        new_nonogram = \
+            nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+        new_nonogram.reset_solution()
+        empty_solution = [[0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0]]
+        self.assertEqual(new_nonogram.solution, empty_solution)
+
 
 if __name__ == '__main__':
     unittest.main()
