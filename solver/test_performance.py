@@ -1,18 +1,19 @@
+import solver.basic
+import timeit
 import sys
 import os
 test_path = os.path.join(os.path.dirname(__file__), '../')
 sys.path.insert(0, os.path.abspath(test_path))
 
-import timeit
-import solver.basic
 
 def run():
     puzzle.solver1()
 
+
 def run_single_puzzle(puzzle):
     iterations = 10000
-    time = timeit.timeit("run()", \
-                         setup="from __main__ import run", \
+    time = timeit.timeit("run()",
+                         setup="from __main__ import run",
                          number=iterations)
     complete = puzzle.is_complete()
     print("Solved: {}".format(bool(complete)))
@@ -22,6 +23,7 @@ def run_single_puzzle(puzzle):
         correct = puzzle.is_correct()
         print("Correct: {}".format(correct))
     print("Time = {:8.5f} ms".format(time / iterations * 1000))
+
 
 if __name__ == '__main__':
     # make puzzle global so timeit can access it
