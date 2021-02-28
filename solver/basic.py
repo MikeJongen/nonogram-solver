@@ -1,4 +1,5 @@
 from solver.nonogram import Nonogram
+from solver.nonogram import Row
 from solver.error import *
 
 
@@ -127,3 +128,24 @@ class BasicSolver(Nonogram):
             else:
                 solution.append(0)
         return solution
+
+
+class BasicRowSolver(Row):
+    def solve_defined_row(self):
+        """
+        Solves a row/column that has only one possible solution
+        """
+        length_clue = sum(self.clues) + len(self.clues) - 1
+
+        if self.clues == []:
+            # empty row
+            self.values = [-1 for i in range(self.size)]
+        elif length_clue == self.size:
+            # clue fills entire row
+            self.values = []
+            for block in self.clues:
+                self.values.extend([1 for i in range(block)])
+                self.values.append(-1)
+            del self.values[-1]
+        else:
+            raise SolveError
