@@ -115,15 +115,11 @@ class Nonogram:
         """
         correct = True
         for row_index in range(self.get_size_y()):
-            clue = self.clues[self.x][row_index]
-            values = self._get_solution_row(self.x, row_index)
-            row = Row(clue, values)
+            row = Row(*self.get_clue_solution_pair("x", row_index))
             if not row.is_correct():
                 correct = False
         for col_index in range(self.get_size_x()):
-            clue = self.clues[self.y][col_index]
-            values = self._get_solution_row(self.y, col_index)
-            row = Row(clue, values)
+            row = Row(*self.get_clue_solution_pair("y", col_index))
             if not row.is_correct():
                 correct = False
         return correct
