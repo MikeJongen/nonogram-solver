@@ -1,10 +1,11 @@
+import sys
+import os
+test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
+sys.path.insert(0, os.path.abspath(test_path))  # nopep8
+
 from solver.error import *
 import solver.nonogram as nonogram
 import unittest
-import sys
-import os
-test_path = os.path.join(os.path.dirname(__file__), '../')
-sys.path.insert(0, os.path.abspath(test_path))
 
 
 class TestRow(unittest.TestCase):
@@ -35,3 +36,7 @@ class TestRow(unittest.TestCase):
         self.assertFalse(row.is_correct())
         row.values = [1, 1, 1, 1, 1, -1, 1, 1, 1, 1]
         self.assertTrue(row.is_correct())
+
+
+if __name__ == '__main__':
+    unittest.main()

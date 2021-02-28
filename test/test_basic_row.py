@@ -1,10 +1,11 @@
+import sys
+import os
+test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
+sys.path.insert(0, os.path.abspath(test_path))  # nopep8
+
 from solver.error import *
 import solver.basic as basic
 import unittest
-import sys
-import os
-test_path = os.path.join(os.path.dirname(__file__), '../')
-sys.path.insert(0, os.path.abspath(test_path))
 
 
 class TestBasicRow(unittest.TestCase):
@@ -17,3 +18,7 @@ class TestBasicRow(unittest.TestCase):
         row = basic.BasicRowSolver([], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         row.solve_defined_row()
         self.assertEqual(row.values, [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1])
+
+
+if __name__ == '__main__':
+    unittest.main()
