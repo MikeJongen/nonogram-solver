@@ -8,6 +8,7 @@ import timeit
 
 
 def run():
+    puzzle.reset_solution()
     puzzle.solver1()
 
 
