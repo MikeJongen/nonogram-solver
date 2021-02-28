@@ -189,16 +189,6 @@ class TestNonogram(unittest.TestCase):
         expected_column = [1, -1, 1, -1, 1]
         self.assertEqual(expected_column, column)
 
-    def test_getcluesfromrow(self):
-        new_nonogram = \
-            nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
-        row_clues = new_nonogram._get_clues_from_row(new_nonogram.x, 2)
-        expected_row_clues = [1, 3]
-        self.assertEqual(expected_row_clues, row_clues)
-        col_clues = new_nonogram._get_clues_from_row(new_nonogram.y, 3)
-        expected_col_clues = [1, 1, 1]
-        self.assertEqual(expected_col_clues, col_clues)
-
     def test_getsolutionrowcopy(self):
         """
         Make sure _get_solution_row returns a copy, and adjusting this does not 

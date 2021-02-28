@@ -108,12 +108,16 @@ class Nonogram:
         """
         correct = True
         for row_index in range(self.get_size_y()):
-            derived_clue = self._get_clues_from_row(self.x, row_index)
-            if derived_clue != self.clues[self.x][row_index]:
+            clue = self.clues[self.x][row_index]
+            values = self._get_solution_row(self.x, row_index)
+            row = Row(clue, values)
+            if not row.is_correct():
                 correct = False
         for col_index in range(self.get_size_x()):
-            derived_clue = self._get_clues_from_row(self.y, col_index)
-            if derived_clue != self.clues[self.y][col_index]:
+            clue = self.clues[self.y][col_index]
+            values = self._get_solution_row(self.y, col_index)
+            row = Row(clue, values)
+            if not row.is_correct():
                 correct = False
         return correct
 
@@ -198,23 +202,6 @@ class Nonogram:
             return row
         else:
             raise AxisError
-
-    def _get_clues_from_row(self, input_axis, row_index) -> list:
-        """
-        Get clue list, created from the current state of the solution
-        """
-        row = self._get_solution_row(input_axis, row_index)
-        clues = []
-        current_clue = 0
-        for element in row:
-            if element == 1:
-                current_clue += 1
-            elif current_clue != 0:
-                clues.append(current_clue)
-                current_clue = 0
-        if current_clue != 0:
-            clues.append(current_clue)
-        return clues
 
 
 class Row:
