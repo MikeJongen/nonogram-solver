@@ -191,7 +191,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_getsolutionrowcopy(self):
         """
-        Make sure _get_solution_row returns a copy, and adjusting this does not 
+        Make sure _get_solution_row returns a copy, and adjusting this does not
         change the original solution.
         """
         new_nonogram = \
@@ -208,6 +208,14 @@ class TestNonogram(unittest.TestCase):
         row2[1] = 1
         row2[4] = 1
         self.assertEqual(new_nonogram.solution, expected_solution)
+
+    def test_get_clue_solution_pair(self):
+        new_nonogram = \
+            nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
+        pair = new_nonogram.get_clue_solution_pair("x", 1)
+        self.assertEqual(pair, ([1, 1], [1, -1, 1, -1, -1]))
+        pair = new_nonogram.get_clue_solution_pair("y", 1)
+        self.assertEqual(pair, ([], [-1, -1, -1, -1, -1]))
 
 
 if __name__ == '__main__':

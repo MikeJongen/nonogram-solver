@@ -81,6 +81,13 @@ class Nonogram:
                 raise ClueError
             self.clues[cur_axis][index] = clue
 
+    def get_clue_solution_pair(self, input_axis, row_index):
+        cur_axis = self.axis[input_axis]
+
+        clues = self.clues[cur_axis][row_index]
+        values = self._get_solution_row(cur_axis, row_index)
+        return (clues, values)
+
     def is_complete(self) -> bool:
         """
         Checks if puzzle is completely filled in (no unknown values left)
@@ -243,7 +250,7 @@ class Row:
     def is_correct(self) -> bool:
         """
         Checks if row solution fits the clues
-        Non complete solution is interpreted as incorrect 
+        Non complete solution is interpreted as incorrect
         """
         if not self.is_complete():
             return False
