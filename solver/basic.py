@@ -1,11 +1,13 @@
 from solver.nonogram import Nonogram
 from solver.error import *
 
+
 class BasicSolver(Nonogram):
     """simple solver class
 
     First try at a solver class.
     """
+
     def solver1(self):
         """only solves rows/columns which have one possible solution"""
         for index in range(self.size[self.y]):
@@ -47,7 +49,7 @@ class BasicSolver(Nonogram):
         row_solution = all_solutions[0]
 
         for solution in all_solutions:
-            row_solution = self._get_matching_solution(solution, \
+            row_solution = self._get_matching_solution(solution,
                                                        row_solution)
         self._set_solution_row(cur_axis, index, row_solution)
 
@@ -68,7 +70,7 @@ class BasicSolver(Nonogram):
         row_size = self.size[cur_axis]
 
         solutions_list = []
-        return self._list_of_solutions(solutions_list, [], \
+        return self._list_of_solutions(solutions_list, [],
                                        cur_clue, row_size)
 
     def _list_of_solutions(self, total, start, clue, size):
@@ -100,10 +102,9 @@ class BasicSolver(Nonogram):
                     solution.append(1)
                 solution.append(-1)
                 new_size = size - clue[0] - solution_no - 1
-                total = self._list_of_solutions(total, solution, \
+                total = self._list_of_solutions(total, solution,
                                                 clue[1:], new_size)
             return total
-
 
     def _number_of_solutions(self, empty_spaces, no_clues):
         if no_clues == 1:
