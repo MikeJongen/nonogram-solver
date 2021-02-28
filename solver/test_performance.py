@@ -7,6 +7,15 @@ import solver.basic
 import timeit
 
 
+class Performance_Test:
+    def __init__(self, solver_class, puzzle_file):
+        self.solver = solver_class(file=puzzle_file)
+
+    def run(self):
+        self.solver.reset_solution()
+        self.solver.solver1()
+
+
 def run():
     puzzle.reset_solution()
     puzzle.solver1()
