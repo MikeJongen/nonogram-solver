@@ -12,6 +12,7 @@ class TestRow(unittest.TestCase):
         row = nonogram.Row([5, 4], [1, 1, 1, 1, 1, -1, 1, 1, 1, 1])
         self.assertEqual(row.clues, [5, 4])
         self.assertEqual(row.values, [1, 1, 1, 1, 1, -1, 1, 1, 1, 1])
+        self.assertEqual(row.size, 10)
 
     def test_reconstruct_clues(self):
         original_clues = [5, 4]

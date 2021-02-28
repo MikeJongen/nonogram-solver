@@ -214,6 +214,7 @@ class Row:
     def __init__(self, clues, values):
         self.clues = clues
         self.values = values
+        self.size = len(self.values)
 
     def _reconstruct_clues(self) -> list:
         """
