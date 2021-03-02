@@ -22,26 +22,20 @@ class Nonogram:
         Initializes using file or puzzle size
         """
         self.clues = dict()
+        self.size = dict()
 
         if file == None:
             # Create empty Nonogram
-            self.size = [0, 0]
-            self.size[self.x] = size_x
-            self.size[self.y] = size_y
+            self.size["x"] = size_x
+            self.size["y"] = size_y
 
-            self.solution = [[0 for y in range(self.get_size_y())]
-                             for x in range(self.get_size_x())]
-            self.clues["x"] = [[] for x in range(self.get_size_y())]
-            self.clues["y"] = [[] for y in range(self.get_size_x())]
+            self.solution = [[0 for y in range(self.size["y"])]
+                             for x in range(self.size["x"])]
+            self.clues["x"] = [[] for x in range(self.size["y"])]
+            self.clues["y"] = [[] for y in range(self.size["x"])]
         else:
             # Load from file
             self.load(file)
-
-    def get_size_x(self):
-        return self.size[self.x]
-
-    def get_size_y(self):
-        return self.size[self.y]
 
     def set_clues_x(self, *clues):
         """
@@ -71,14 +65,11 @@ class Nonogram:
         *clues : list
             list of clues, where every clue is a list of ints
         """
-        cur_axis = self.axis[input_axis]
-        other_axis = not cur_axis
-
-        if len(clues) != self.size[other_axis]:
+        if len(clues) != self.size[self._other_axis(input_axis)]:
             raise LengthError
         for index, clue in enumerate(clues):
             min_length_clue = sum(clue) + len(clue) - 1
-            if(min_length_clue > self.size[cur_axis]):
+            if(min_length_clue > self.size[input_axis]):
                 raise ClueError
             self.clues[input_axis][index] = clue
 
@@ -100,7 +91,7 @@ class Nonogram:
         """
         Returns percentage filled in cells / total cells
         """
-        size = self.size[self.x] * self.size[self.y]
+        size = self.size["x"] * self.size["y"]
         empty_elements = 0
         for row in self.solution:
             for element in row:
@@ -115,26 +106,26 @@ class Nonogram:
         Checks if puzzle solution fits the clues
         """
         correct = True
-        for row_index in range(self.get_size_y()):
+        for row_index in range(self.size["y"]):
             row = Row(*self.get_clue_solution_pair("x", row_index))
             if not row.is_correct():
                 correct = False
-        for col_index in range(self.get_size_x()):
+        for col_index in range(self.size["x"]):
             row = Row(*self.get_clue_solution_pair("y", col_index))
             if not row.is_correct():
                 correct = False
         return correct
 
     def reset_solution(self):
-        self.solution = [[0 for y in range(self.get_size_y())]
-                         for x in range(self.get_size_x())]
+        self.solution = [[0 for y in range(self.size["y"])]
+                         for x in range(self.size["x"])]
 
     def print_solution(self):
-        top_row = "+" + self.get_size_x() * "--+"
+        top_row = "+" + self.size["x"] * "--+"
         print(top_row)
-        for y in range(self.get_size_y()):
+        for y in range(self.size["y"]):
             row = "|"
-            for x in range(self.get_size_x()):
+            for x in range(self.size["x"]):
                 row += f"{self.printable_values[self.solution[x][y]]}|"
             print(row)
             print(top_row)
@@ -157,10 +148,20 @@ class Nonogram:
     def load(self, filename):
         file = open(filename, 'r')
         data = json.load(file)
-        self.size, self.solution, clues = data
+        size, self.solution, clues = data
         self.clues["x"] = clues[0]
         self.clues["y"] = clues[1]
+        self.size["x"] = size[0]
+        self.size["y"] = size[1]
         file.close()
+
+    def _other_axis(self, axis):
+        if axis == "x":
+            return "y"
+        elif axis == "y":
+            return "x"
+        else:
+            raise AxisError
 
     def _set_solution_row(self, input_axis, row_index, solution_row,
                           forced=True):

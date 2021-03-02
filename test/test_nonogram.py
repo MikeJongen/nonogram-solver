@@ -16,7 +16,7 @@ class TestNonogram(unittest.TestCase):
     def test_init_from_file(self):
         new_nonogram = \
             nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
-        expected_size = [5, 5]
+        expected_size = {"x": 5, "y": 5}
         expected_solution = [[1,  1,  1,  1,  1],
                              [-1, -1, -1, -1, -1],
                              [1,  1,  1, -1,  1],
@@ -30,11 +30,6 @@ class TestNonogram(unittest.TestCase):
         self.assertEqual(expected_size, new_nonogram.size)
         self.assertEqual(expected_solution, new_nonogram.solution)
         self.assertEqual(expected_clues, new_nonogram.clues)
-
-    def test_size(self):
-        new_nonogram = nonogram.Nonogram(5, 10)
-        self.assertEqual(new_nonogram.get_size_x(),  5)
-        self.assertEqual(new_nonogram.get_size_y(),  10)
 
     def test_isnotcomplete(self):
         new_nonogram = nonogram.Nonogram(5, 10)
@@ -122,7 +117,7 @@ class TestNonogram(unittest.TestCase):
     def test_load(self):
         new_nonogram = nonogram.Nonogram(5, 5)
         new_nonogram.load("puzzles/test/nonogram_load.txt")
-        expected_size = [5, 5]
+        expected_size = {"x": 5, "y": 5}
         expected_solution = [[1,  1,  1,  1,  1],
                              [-1, -1, -1, -1, -1],
                              [1,  1,  1, -1,  1],

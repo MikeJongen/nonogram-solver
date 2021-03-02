@@ -13,7 +13,7 @@ class TrivialSolver(Nonogram):
 
     def solve(self):
         """only solves rows/columns which have one possible solution"""
-        for index in range(self.size[self.y]):
+        for index in range(self.size["y"]):
             try:
                 row = TrivialRowSolver(
                     *self.get_clue_solution_pair("x", index))
@@ -21,7 +21,7 @@ class TrivialSolver(Nonogram):
                 self._set_solution_row(self.x, index, row_solution)
             except SolveError:
                 pass
-        for index in range(self.size[self.x]):
+        for index in range(self.size["x"]):
             try:
                 row = TrivialRowSolver(
                     *self.get_clue_solution_pair("y", index))
