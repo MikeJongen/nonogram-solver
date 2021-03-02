@@ -3,7 +3,7 @@ import os
 test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
 sys.path.insert(0, os.path.abspath(test_path))  # nopep8
 
-import solver.basic.basic as basic
+from solver.basic import trivial
 import timeit
 
 
@@ -13,7 +13,7 @@ class Performance_Test:
 
     def run(self):
         self.solver.reset_solution()
-        self.solver.solver1()
+        self.solver.solve()
 
     def get_results(self):
         return {"done": self.solver.is_complete(),
@@ -61,7 +61,7 @@ class Test_Runner:
 
 
 if __name__ == '__main__':
-    testrunner = Test_Runner(basic.BasicSolver)
+    testrunner = Test_Runner(trivial.TrivialSolver)
 
     for filename in os.listdir("puzzles/easy"):
         puzzle_file = "puzzles/easy/" + filename

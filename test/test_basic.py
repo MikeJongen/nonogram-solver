@@ -9,17 +9,6 @@ import unittest
 
 
 class TestBasic(unittest.TestCase):
-    def test_solver1(self):
-        new_nonogram = \
-            basic.BasicSolver(file="puzzles/test/basic_solver1.txt")
-        new_nonogram.solver1()
-        expected_solution = [[1,  1,  1,  1,  1],
-                             [-1, -1, -1, -1, -1],
-                             [1,  1,  1, -1,  1],
-                             [1, -1,  1, -1,  1],
-                             [0,  1,  0,  0,  1]]
-        self.assertEqual(new_nonogram.solution, expected_solution)
-
     def test_fillcommonelementsrow(self):
         new_nonogram = basic.BasicSolver(10, 5)
         clues_y = [[4], [2, 2], [5], [5], [2, 1],
