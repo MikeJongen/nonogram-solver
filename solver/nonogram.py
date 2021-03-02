@@ -148,7 +148,8 @@ class Nonogram:
 
     def save(self, filename):
         file = open(filename, 'w')
-        data = self.size, self.solution, self.clues
+        data = {"clues": self.clues,
+                "solution": self.solution}
         json.dump(data, file)
         file.close()
 

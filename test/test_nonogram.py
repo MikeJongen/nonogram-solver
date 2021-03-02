@@ -102,14 +102,15 @@ class TestNonogram(unittest.TestCase):
                                  [1, -1,  1, -1,  1],
                                  [-1, -1,  1, -1, -1]]
         new_nonogram.save("puzzles/test/temp.txt")
-        expected_savefile = "[[5, 5], "
+        expected_savefile = "{\"clues\": "
+        expected_savefile += "[[[1, 2], [1, 1], [1, 3], [1], [1, 2]],"
+        expected_savefile += " [[5], [], [3, 1], [1, 1, 1], [1]]], "
+        expected_savefile += "\"solution\": "
         expected_savefile += "[[1, 1, 1, 1, 1],"
         expected_savefile += " [-1, -1, -1, -1, -1],"
         expected_savefile += " [1, 1, 1, -1, 1],"
         expected_savefile += " [1, -1, 1, -1, 1],"
-        expected_savefile += " [-1, -1, 1, -1, -1]], "
-        expected_savefile += "[[[1, 2], [1, 1], [1, 3], [1], [1, 2]],"
-        expected_savefile += " [[5], [], [3, 1], [1, 1, 1], [1]]]]"
+        expected_savefile += " [-1, -1, 1, -1, -1]]}"
         f = open("puzzles/test/temp.txt", "r")
         saved_text = f.read()
         f.close()
