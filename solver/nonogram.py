@@ -131,10 +131,13 @@ class Nonogram:
         for clue in self.clues["y"]:
             print(clue)
 
-    def save(self, filename):
+    def save(self, filename, only_clues=False):
         file = open(filename, 'w')
-        data = {"clues": self.clues,
-                "solution": self.solution}
+        if only_clues:
+            data = {"clues": self.clues}
+        else:
+            data = {"clues": self.clues,
+                    "solution": self.solution}
         json.dump(data, file)
         file.close()
 

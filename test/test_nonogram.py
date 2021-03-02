@@ -114,6 +114,27 @@ class TestNonogram(unittest.TestCase):
         self.assertEqual(expected_savefile, saved_text)
         os.remove("puzzles/test/temp.json")
 
+    def test_save_only_clues(self):
+        new_nonogram = nonogram.Nonogram(5, 5)
+        clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
+        clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
+        new_nonogram.set_clues_x(*clues_x)
+        new_nonogram.set_clues_y(*clues_y)
+        new_nonogram.solution = [[1,  1,  1,  1,  1],
+                                 [-1, -1, -1, -1, -1],
+                                 [1,  1,  1, -1,  1],
+                                 [1, -1,  1, -1,  1],
+                                 [-1, -1,  1, -1, -1]]
+        new_nonogram.save("puzzles/test/temp.json", only_clues=True)
+        expected_savefile = "{\"clues\": "
+        expected_savefile += "{\"x\": [[1, 2], [1, 1], [1, 3], [1], [1, 2]],"
+        expected_savefile += " \"y\": [[5], [], [3, 1], [1, 1, 1], [1]]}}"
+        f = open("puzzles/test/temp.json", "r")
+        saved_text = f.read()
+        f.close()
+        self.assertEqual(expected_savefile, saved_text)
+        os.remove("puzzles/test/temp.json")
+
     def test_load(self):
         new_nonogram = nonogram.Nonogram(5, 5)
         new_nonogram.load("puzzles/test/nonogram_load.json")
