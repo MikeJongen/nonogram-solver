@@ -131,8 +131,8 @@ class Nonogram:
         for clue in self.clues["y"]:
             print(clue)
 
-    def save(self, filename, only_clues=False):
-        file = open(filename, 'w')
+    def save(self, file, only_clues=False):
+        file = open(file, 'w')
         if only_clues:
             data = {"clues": self.clues}
         else:
@@ -141,8 +141,8 @@ class Nonogram:
         json.dump(data, file)
         file.close()
 
-    def load(self, filename):
-        file = open(filename, 'r')
+    def load(self, file):
+        file = open(file, 'r')
         data = json.load(file)
         self.clues = data["clues"]
         self.size["x"] = len(self.clues["x"])
