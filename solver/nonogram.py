@@ -234,6 +234,8 @@ class Row:
         self.clues = clues
         self.values = values
         self.size = len(self.values)
+        self.solved = False
+        self.clue_size = sum(self.clues) + len(self.clues) - 1
 
     def _reconstruct_clues(self) -> list:
         """
