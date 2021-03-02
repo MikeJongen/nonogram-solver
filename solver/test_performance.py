@@ -4,6 +4,7 @@ test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
 sys.path.insert(0, os.path.abspath(test_path))  # nopep8
 
 from solver.basic import trivial
+from solver.basic import simple_boxes
 import timeit
 
 
@@ -86,7 +87,16 @@ class Test_Runner:
 
 if __name__ == '__main__':
     testrunner = Test_Runner(trivial.TrivialSolver)
+    for filename in os.listdir("puzzles/easy"):
+        puzzle_file = "puzzles/easy/" + filename
+        testrunner.run_correctness_test(puzzle_file)
+        testrunner.run_timing_test(puzzle_file)
+        print("\nPuzzle: " + filename.strip(".txt"))
+        testrunner.print_correctness(puzzle_file)
+        testrunner.print_timing(puzzle_file)
+    testrunner.print_summary()
 
+    testrunner = Test_Runner(simple_boxes.SimpleBoxesSolver)
     for filename in os.listdir("puzzles/easy"):
         puzzle_file = "puzzles/easy/" + filename
         testrunner.run_correctness_test(puzzle_file)
