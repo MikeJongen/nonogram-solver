@@ -141,11 +141,10 @@ class Nonogram:
     def load(self, filename):
         file = open(filename, 'r')
         data = json.load(file)
-        size, self.solution, clues = data
-        self.clues["x"] = clues[0]
-        self.clues["y"] = clues[1]
-        self.size["x"] = size[0]
-        self.size["y"] = size[1]
+        self.clues = data["clues"]
+        self.size["x"] = len(self.clues["x"])
+        self.size["y"] = len(self.clues["y"])
+        self.solution = data["solution"]
         file.close()
 
     def _other_axis(self, axis):
