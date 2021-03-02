@@ -144,7 +144,11 @@ class Nonogram:
         self.clues = data["clues"]
         self.size["x"] = len(self.clues["x"])
         self.size["y"] = len(self.clues["y"])
-        self.solution = data["solution"]
+        if "solution" in data:
+            self.solution = data["solution"]
+        else:
+            self.solution = [[0 for y in range(self.size["y"])]
+                             for x in range(self.size["x"])]
         file.close()
 
     def _other_axis(self, axis):
