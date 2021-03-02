@@ -3,7 +3,7 @@ import os
 test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
 sys.path.insert(0, os.path.abspath(test_path))  # nopep8
 
-import solver.basic
+import solver.basic.basic as basic
 import timeit
 
 
@@ -61,7 +61,7 @@ class Test_Runner:
 
 
 if __name__ == '__main__':
-    testrunner = Test_Runner(solver.basic.BasicSolver)
+    testrunner = Test_Runner(basic.BasicSolver)
 
     for filename in os.listdir("puzzles/easy"):
         puzzle_file = "puzzles/easy/" + filename
