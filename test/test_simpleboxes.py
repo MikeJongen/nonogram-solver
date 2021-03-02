@@ -73,6 +73,18 @@ class TestSimpleBoxes(unittest.TestCase):
         row.solve_simple_boxes()
         self.assertEqual(row.values, [1, 1, 1, 1, 1, 0, 1, 1, 1, 1])
 
+    def test_solver(self):
+        new_nonogram = \
+            simple_boxes.SimpleBoxesSolver(
+                file="puzzles/test/nonogram_simple_boxes.json")
+        new_nonogram.solve()
+        expected_solution = [[0, 1, 1, 1, 0],
+                             [0, 1, 0, 0, 1],
+                             [0, 0, 1, 1, 0],
+                             [0, 0, 0, 1, 0],
+                             [0, 0, 0, 0, 0]]
+        self.assertEqual(new_nonogram.solution, expected_solution)
+
 
 if __name__ == '__main__':
     unittest.main()

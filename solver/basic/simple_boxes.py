@@ -13,13 +13,13 @@ class SimpleBoxesSolver(Nonogram):
         for index in range(self.size["y"]):
             row = SimpleBoxesRowSolver(
                 *self.get_clue_solution_pair("x", index))
-            changed = row.solve_defined_row()
+            changed = row.solve_simple_boxes()
             if changed:
                 self._set_solution_row("x", index, row.values)
         for index in range(self.size["x"]):
             row = SimpleBoxesRowSolver(
                 *self.get_clue_solution_pair("y", index))
-            changed = row.solve_defined_row()
+            changed = row.solve_simple_boxes()
             if changed:
                 self._set_solution_row("y", index, row.values)
 
@@ -47,7 +47,7 @@ class SimpleBoxesRowSolver(Row):
             if movement_space < clue:
                 self._simple_boxes_clue(index, clue)
 
-        return self.solved
+        return True
 
     def _simple_boxes_clue(self, index, clue):
         """
