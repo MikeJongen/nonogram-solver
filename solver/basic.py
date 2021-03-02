@@ -120,6 +120,9 @@ class BasicRowSolver(Row):
         """
         Solves a row/column that has only one possible solution
         """
+        if self.is_complete():
+            return self.values
+
         length_clue = sum(self.clues) + len(self.clues) - 1
 
         if self.clues == []:
