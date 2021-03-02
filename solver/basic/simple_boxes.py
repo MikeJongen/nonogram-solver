@@ -39,6 +39,11 @@ class SimpleBoxesRowSolver(Row):
 
         movement_space = self.size - self.clue_size
 
+        if len(self.clues) == 0:
+            # simple box does not work with empty list
+            # and max gives error on empty list
+            return False
+
         if movement_space >= max(self.clues):
             # clues too small for simple boxes to work
             return False

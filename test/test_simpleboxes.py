@@ -15,7 +15,7 @@ class TestSimpleBoxes(unittest.TestCase):
             [5, 4], empty)
         row.solve_simple_boxes()
         self.assertEqual(
-            row.values, empty)
+            row.values, [0] * 15)
 
     def test_solve_clues_just_big_enough(self):
         empty = [0] * 15
@@ -72,6 +72,13 @@ class TestSimpleBoxes(unittest.TestCase):
             [5, 4], empty)
         row.solve_simple_boxes()
         self.assertEqual(row.values, [1, 1, 1, 1, 1, 0, 1, 1, 1, 1])
+
+    def test_solve_empty_row(self):
+        empty = [0] * 10
+        row = simple_boxes.SimpleBoxesRowSolver(
+            [], empty)
+        row.solve_simple_boxes()
+        self.assertEqual(row.values, [0] * 10)
 
     def test_solver(self):
         new_nonogram = \
