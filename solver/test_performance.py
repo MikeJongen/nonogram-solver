@@ -59,6 +59,22 @@ class Test_Runner:
             print("Percentage: {:5.2f}%".format(
                 self.correct_results[puzzle]["done_pct"]))
 
+    def print_summary(self):
+        total_sum = 0
+        completed_sum = 0
+        correct_sum = 0
+        for key in self.correct_results:
+            total_sum += 1
+            done = self.correct_results[key]["done"]
+            if done:
+                completed_sum += 1
+                correct_sum += self.correct_results[key]["correct"]
+        print("-------------------------------")
+        print("Total complete: {}% ({}/{})".format(completed_sum /
+                                                   total_sum * 100, completed_sum, total_sum))
+        print("Completed correct: {}% ({}/{})".format(correct_sum /
+                                                      completed_sum * 100, correct_sum, completed_sum))
+
 
 if __name__ == '__main__':
     testrunner = Test_Runner(trivial.TrivialSolver)
@@ -70,3 +86,4 @@ if __name__ == '__main__':
         print("\nPuzzle: " + filename.strip(".txt"))
         testrunner.print_correctness(puzzle_file)
         testrunner.print_timing(puzzle_file)
+    testrunner.print_summary()
