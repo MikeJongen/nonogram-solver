@@ -9,51 +9,29 @@ class BasicSolver(Nonogram):
     First try at a solver class.
     """
 
-    def solver1(self):
-        """only solves rows/columns which have one possible solution"""
-        for index in range(self.size[self.y]):
-            try:
-                row = BasicRowSolver(
-                    *self.get_clue_solution_pair("x", index))
-                row_solution = row.solve_defined_row()
-                self._set_solution_row(self.x, index, row_solution)
-            except SolveError:
-                pass
-        for index in range(self.size[self.x]):
-            try:
-                row = BasicRowSolver(
-                    *self.get_clue_solution_pair("y", index))
-                row_solution = row.solve_defined_row()
-                self._set_solution_row(self.y, index, row_solution)
-            except SolveError:
-                pass
-
     def fill_common_elements_row(self, input_axis, index):
         """Fills all elements which are common for all solutions"""
-        cur_axis = self.axis[input_axis]
         all_solutions = self.get_all_solutions(input_axis, index)
         row_solution = all_solutions[0]
 
         for solution in all_solutions:
             row_solution = self._get_matching_solution(solution,
                                                        row_solution)
-        self._set_solution_row(cur_axis, index, row_solution)
+        self._set_solution_row(input_axis, index, row_solution)
 
     def get_number_of_solutions_total(self, input_axis, index):
         """Returns the number of possible solutions for the row"""
-        cur_axis = self.axis[input_axis]
         cur_clue = self.clues[input_axis][index]
         length_clue = sum(cur_clue) + len(cur_clue) - 1
-        empty_spaces = self.size[cur_axis] - length_clue
+        empty_spaces = self.size[input_axis] - length_clue
         no_clues = len(cur_clue)
 
         return self._number_of_solutions(empty_spaces, no_clues)
 
     def get_all_solutions(self, input_axis, index):
         """Returns a list with all possible solutions for the row"""
-        cur_axis = self.axis[input_axis]
         cur_clue = self.clues[input_axis][index]
-        row_size = self.size[cur_axis]
+        row_size = self.size[input_axis]
 
         solutions_list = []
         return self._list_of_solutions(solutions_list, [],
@@ -113,29 +91,3 @@ class BasicSolver(Nonogram):
             else:
                 solution.append(0)
         return solution
-
-
-class BasicRowSolver(Row):
-    def solve_defined_row(self):
-        """
-        Solves a row/column that has only one possible solution
-        """
-        if self.is_complete():
-            return self.values
-
-        length_clue = sum(self.clues) + len(self.clues) - 1
-
-        if self.clues == []:
-            # empty row
-            self.values = [-1 for i in range(self.size)]
-        elif length_clue == self.size:
-            # clue fills entire row
-            self.values = []
-            for block in self.clues:
-                self.values.extend([1 for i in range(block)])
-                self.values.append(-1)
-            del self.values[-1]
-        else:
-            raise SolveError
-
-        return self.values

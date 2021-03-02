@@ -40,16 +40,16 @@ class TestNonogram(unittest.TestCase):
         example_row = [1, 1, 1, 1, 1]
         example_col = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.assertEqual(new_nonogram.percent_complete(), 0)
-        new_nonogram._set_solution_row(new_nonogram.x, 0, example_row)
+        new_nonogram._set_solution_row("x", 0, example_row)
         self.assertEqual(new_nonogram.percent_complete(), 10.0)
-        new_nonogram._set_solution_row(new_nonogram.x, 1, example_row)
+        new_nonogram._set_solution_row("x", 1, example_row)
         self.assertEqual(new_nonogram.percent_complete(), 20.0)
-        new_nonogram._set_solution_row(new_nonogram.y, 0, example_col)
+        new_nonogram._set_solution_row("y", 0, example_col)
         self.assertEqual(new_nonogram.percent_complete(), 36.0)
-        new_nonogram._set_solution_row(new_nonogram.y, 1, example_col)
-        new_nonogram._set_solution_row(new_nonogram.y, 2, example_col)
-        new_nonogram._set_solution_row(new_nonogram.y, 3, example_col)
-        new_nonogram._set_solution_row(new_nonogram.y, 4, example_col)
+        new_nonogram._set_solution_row("y", 1, example_col)
+        new_nonogram._set_solution_row("y", 2, example_col)
+        new_nonogram._set_solution_row("y", 3, example_col)
+        new_nonogram._set_solution_row("y", 4, example_col)
         self.assertEqual(new_nonogram.percent_complete(), 100.0)
 
     def test_iscorrect(self):
@@ -136,12 +136,12 @@ class TestNonogram(unittest.TestCase):
         new_nonogram = \
             nonogram.Nonogram(file="puzzles/test/nonogram_halfdone.txt")
         test_column = [1, -1, 0, -1, 1]
-        new_nonogram._set_solution_row(new_nonogram.y, 2, test_column)
-        new_column = new_nonogram._get_solution_row(new_nonogram.y, 2)
+        new_nonogram._set_solution_row("y", 2, test_column)
+        new_column = new_nonogram._get_solution_row("y", 2)
         self.assertEqual(new_column, test_column)
         test_row = [-1, 1, 0, -1, 1]
-        new_nonogram._set_solution_row(new_nonogram.x, 0, test_row, 1)
-        new_row = new_nonogram._get_solution_row(new_nonogram.x, 0)
+        new_nonogram._set_solution_row("x", 0, test_row, 1)
+        new_row = new_nonogram._get_solution_row("x", 0)
         self.assertEqual(new_row, test_row)
 
     def test_setsolutionvalue(self):
@@ -183,10 +183,10 @@ class TestNonogram(unittest.TestCase):
     def test_getsolutionrow(self):
         new_nonogram = \
             nonogram.Nonogram(file="puzzles/test/nonogram_load.txt")
-        row = new_nonogram._get_solution_row(new_nonogram.x, 1)
+        row = new_nonogram._get_solution_row("x", 1)
         expected_row = [1, -1, 1, -1, -1]
         self.assertEqual(expected_row, row)
-        column = new_nonogram._get_solution_row(new_nonogram.y, 3)
+        column = new_nonogram._get_solution_row("y", 3)
         expected_column = [1, -1, 1, -1, 1]
         self.assertEqual(expected_column, column)
 
@@ -202,8 +202,8 @@ class TestNonogram(unittest.TestCase):
                              [0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0]]
-        row1 = new_nonogram._get_solution_row(0, 1)
-        row2 = new_nonogram._get_solution_row(1, 3)
+        row1 = new_nonogram._get_solution_row("x", 1)
+        row2 = new_nonogram._get_solution_row("y", 3)
         row1[0] = 1
         row1[3] = 1
         row2[1] = 1

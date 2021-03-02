@@ -18,7 +18,7 @@ class TrivialSolver(Nonogram):
                 row = TrivialRowSolver(
                     *self.get_clue_solution_pair("x", index))
                 row_solution = row.solve_defined_row()
-                self._set_solution_row(self.x, index, row_solution)
+                self._set_solution_row("x", index, row_solution)
             except SolveError:
                 pass
         for index in range(self.size["x"]):
@@ -26,7 +26,7 @@ class TrivialSolver(Nonogram):
                 row = TrivialRowSolver(
                     *self.get_clue_solution_pair("y", index))
                 row_solution = row.solve_defined_row()
-                self._set_solution_row(self.y, index, row_solution)
+                self._set_solution_row("y", index, row_solution)
             except SolveError:
                 pass
 

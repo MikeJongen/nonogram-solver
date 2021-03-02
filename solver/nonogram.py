@@ -11,11 +11,6 @@ class Nonogram:
     printable_values = {0: "  ",
                         -1: "..",
                         1: "XX"}
-    axis = {"x": 0,
-            "y": 1}
-
-    x = axis["x"]
-    y = axis["y"]
 
     def __init__(self, size_x=0, size_y=0, file=None):
         """
@@ -73,11 +68,9 @@ class Nonogram:
                 raise ClueError
             self.clues[input_axis][index] = clue
 
-    def get_clue_solution_pair(self, input_axis, row_index):
-        cur_axis = self.axis[input_axis]
-
-        clues = self.clues[input_axis][row_index]
-        values = self._get_solution_row(cur_axis, row_index)
+    def get_clue_solution_pair(self, axis, row_index):
+        clues = self.clues[axis][row_index]
+        values = self._get_solution_row(axis, row_index)
         return (clues, values)
 
     def is_complete(self) -> bool:
@@ -163,7 +156,7 @@ class Nonogram:
         else:
             raise AxisError
 
-    def _set_solution_row(self, input_axis, row_index, solution_row,
+    def _set_solution_row(self, axis, row_index, solution_row,
                           forced=True):
         """
         sets row/column to new value.
@@ -173,11 +166,11 @@ class Nonogram:
         forced : bool
             if True, overwrite old values.
         """
-        if input_axis == self.y:
+        if axis == "y":
             for index, value in enumerate(solution_row):
                 self._set_solution_value(row_index, index, value,
                                          forced)
-        elif input_axis == self.x:
+        elif axis == "x":
             for index, value in enumerate(solution_row):
                 self._set_solution_value(index, row_index, value,
                                          forced)
@@ -198,16 +191,16 @@ class Nonogram:
             elif ((value, new) == (-1, 1)) or ((value, new) == (1, -1)):
                 raise SetSolutionError
 
-    def _get_solution_row(self, input_axis, row_index) -> list:
+    def _get_solution_row(self, axis, row_index) -> list:
         """
         Get a copy of a row/column of the solution
         """
-        if input_axis == self.y:
+        if axis == "y":
             row = []
             for value in self.solution[row_index]:
                 row.append(value)
             return row
-        elif input_axis == self.x:
+        elif axis == "x":
             row = []
             for value in self.solution:
                 row.append(value[row_index])
