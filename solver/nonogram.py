@@ -84,22 +84,23 @@ class Nonogram:
         """
         Returns percentage filled in cells / total cells
         """
-        size = self.size["x"] * self.size["y"]
         filled_elements = self.cells_known()
-        percent_complete = (filled_elements / size) * 100
+        percent_complete = (filled_elements / self.total_cells()) * 100
         return percent_complete
+
+    def total_cells(self):
+        return self.size["x"] * self.size["y"]
 
     def cells_known(self):
         """
         Returns total amoutn of cells where the value (filled/blank) is known.
         """
-        size = self.size["x"] * self.size["y"]
         empty_elements = 0
         for row in self.solution:
             for element in row:
                 if element == 0:
                     empty_elements += 1
-        return size - empty_elements
+        return self.total_cells() - empty_elements
 
     def is_correct(self) -> bool:
         """
