@@ -18,6 +18,8 @@ class Performance_Test:
     def get_results(self):
         return {"done": self.solver.is_complete(),
                 "done_pct": self.solver.percent_complete(),
+                "cells_known": self.solver.cells_known(),
+                "total_cells": self.solver.total_cells(),
                 "correct": self.solver.is_correct()}
 
 
@@ -63,15 +65,21 @@ class Test_Runner:
         total_sum = 0
         completed_sum = 0
         correct_sum = 0
+        total_cells_sum = 0
+        completed_cells_sum = 0
         for key in self.correct_results:
             total_sum += 1
             done = self.correct_results[key]["done"]
             if done:
                 completed_sum += 1
                 correct_sum += self.correct_results[key]["correct"]
+            total_cells_sum += self.correct_results[key]["total_cells"]
+            completed_cells_sum += self.correct_results[key]["cells_known"]
         print("-------------------------------")
         print("Total complete: {}% ({}/{})".format(completed_sum /
                                                    total_sum * 100, completed_sum, total_sum))
+        print("Total cells completed: {}% ({}/{})".format(completed_cells_sum /
+                                                          total_cells_sum * 100, completed_cells_sum, total_cells_sum))
         print("Completed correct: {}% ({}/{})".format(correct_sum /
                                                       completed_sum * 100, correct_sum, completed_sum))
 
