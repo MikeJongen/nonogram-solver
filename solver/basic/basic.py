@@ -42,7 +42,7 @@ class BasicSolver(Nonogram):
     def get_number_of_solutions_total(self, input_axis, index):
         """Returns the number of possible solutions for the row"""
         cur_axis = self.axis[input_axis]
-        cur_clue = self.clues[cur_axis][index]
+        cur_clue = self.clues[input_axis][index]
         length_clue = sum(cur_clue) + len(cur_clue) - 1
         empty_spaces = self.size[cur_axis] - length_clue
         no_clues = len(cur_clue)
@@ -52,7 +52,7 @@ class BasicSolver(Nonogram):
     def get_all_solutions(self, input_axis, index):
         """Returns a list with all possible solutions for the row"""
         cur_axis = self.axis[input_axis]
-        cur_clue = self.clues[cur_axis][index]
+        cur_clue = self.clues[input_axis][index]
         row_size = self.size[cur_axis]
 
         solutions_list = []
