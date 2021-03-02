@@ -24,7 +24,9 @@ class TestNonogram(unittest.TestCase):
                              [-1, -1,  1, -1, -1]]
         expected_clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
         expected_clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
-        expected_clues = [expected_clues_x, expected_clues_y]
+        expected_clues = dict()
+        expected_clues["x"] = expected_clues_x
+        expected_clues["y"] = expected_clues_y
         self.assertEqual(expected_size, new_nonogram.size)
         self.assertEqual(expected_solution, new_nonogram.solution)
         self.assertEqual(expected_clues, new_nonogram.clues)
@@ -103,8 +105,8 @@ class TestNonogram(unittest.TestCase):
                                  [-1, -1,  1, -1, -1]]
         new_nonogram.save("puzzles/test/temp.txt")
         expected_savefile = "{\"clues\": "
-        expected_savefile += "[[[1, 2], [1, 1], [1, 3], [1], [1, 2]],"
-        expected_savefile += " [[5], [], [3, 1], [1, 1, 1], [1]]], "
+        expected_savefile += "{\"x\": [[1, 2], [1, 1], [1, 3], [1], [1, 2]],"
+        expected_savefile += " \"y\": [[5], [], [3, 1], [1, 1, 1], [1]]}, "
         expected_savefile += "\"solution\": "
         expected_savefile += "[[1, 1, 1, 1, 1],"
         expected_savefile += " [-1, -1, -1, -1, -1],"
@@ -128,7 +130,9 @@ class TestNonogram(unittest.TestCase):
                              [-1, -1,  1, -1, -1]]
         expected_clues_x = [[1, 2], [1, 1], [1, 3], [1], [1, 2]]
         expected_clues_y = [[5], [], [3, 1], [1, 1, 1], [1]]
-        expected_clues = [expected_clues_x, expected_clues_y]
+        expected_clues = dict()
+        expected_clues["x"] = expected_clues_x
+        expected_clues["y"] = expected_clues_y
         self.assertEqual(expected_size, new_nonogram.size)
         self.assertEqual(expected_solution, new_nonogram.solution)
         self.assertEqual(expected_clues, new_nonogram.clues)

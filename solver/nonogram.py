@@ -21,6 +21,8 @@ class Nonogram:
         """
         Initializes using file or puzzle size
         """
+        self.clues = dict()
+
         if file == None:
             # Create empty Nonogram
             self.size = [0, 0]
@@ -29,9 +31,8 @@ class Nonogram:
 
             self.solution = [[0 for y in range(self.get_size_y())]
                              for x in range(self.get_size_x())]
-            self.clues = [0, 0]
-            self.clues[self.x] = [[] for x in range(self.get_size_y())]
-            self.clues[self.y] = [[] for y in range(self.get_size_x())]
+            self.clues["x"] = [[] for x in range(self.get_size_y())]
+            self.clues["y"] = [[] for y in range(self.get_size_x())]
         else:
             # Load from file
             self.load(file)
@@ -79,12 +80,12 @@ class Nonogram:
             min_length_clue = sum(clue) + len(clue) - 1
             if(min_length_clue > self.size[cur_axis]):
                 raise ClueError
-            self.clues[cur_axis][index] = clue
+            self.clues[input_axis][index] = clue
 
     def get_clue_solution_pair(self, input_axis, row_index):
         cur_axis = self.axis[input_axis]
 
-        clues = self.clues[cur_axis][row_index]
+        clues = self.clues[input_axis][row_index]
         values = self._get_solution_row(cur_axis, row_index)
         return (clues, values)
 
@@ -140,10 +141,10 @@ class Nonogram:
 
     def print_clues(self):
         print("Horizontal clues:")
-        for clue in self.clues[self.x]:
+        for clue in self.clues["x"]:
             print(clue)
         print("Vertical clues:")
-        for clue in self.clues[self.y]:
+        for clue in self.clues["y"]:
             print(clue)
 
     def save(self, filename):
@@ -156,7 +157,9 @@ class Nonogram:
     def load(self, filename):
         file = open(filename, 'r')
         data = json.load(file)
-        self.size, self.solution, self.clues = data
+        self.size, self.solution, clues = data
+        self.clues["x"] = clues[0]
+        self.clues["y"] = clues[1]
         file.close()
 
     def _set_solution_row(self, input_axis, row_index, solution_row,
