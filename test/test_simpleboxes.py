@@ -83,7 +83,7 @@ class TestSimpleBoxes(unittest.TestCase):
     def test_solver(self):
         new_nonogram = \
             simple_boxes.SimpleBoxesSolver(
-                file="puzzles/test/nonogram_simple_boxes.json")
+                file="test/puzzles/nonogram_simple_boxes.json")
         new_nonogram.solve()
         expected_solution = [[0, 1, 1, 1, 0],
                              [0, 1, 0, 0, 1],

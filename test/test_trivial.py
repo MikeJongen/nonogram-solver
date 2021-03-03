@@ -21,7 +21,7 @@ class TestTrivial(unittest.TestCase):
 
     def test_solver1(self):
         new_nonogram = \
-            trivial.TrivialSolver(file="puzzles/test/nonogram_trivial.json")
+            trivial.TrivialSolver(file="test/puzzles/nonogram_trivial.json")
         new_nonogram.solve()
         expected_solution = [[1,  1,  1,  1,  1],
                              [-1, -1, -1, -1, -1],

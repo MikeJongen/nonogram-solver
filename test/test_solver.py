@@ -10,7 +10,7 @@ import unittest
 
 class TestNonogramSolver(unittest.TestCase):
     def test_solver(self):
-        solver = NonogramSolver(file="puzzles/test/nonogram_trivial.json")
+        solver = NonogramSolver(file="test/puzzles/nonogram_trivial.json")
         solver.solve()
         self.assertGreaterEqual(solver.percent_complete(), 88)
 

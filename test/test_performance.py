@@ -10,7 +10,7 @@ import unittest
 
 class TestPerformance(unittest.TestCase):
     def test_performance_test_init(self):
-        test_file = "puzzles/test/nonogram_trivial.json"
+        test_file = "test/puzzles/nonogram_trivial.json"
         test = performance.Performance_Test(trivial.TrivialSolver, test_file)
         pair = test.solver.get_clue_solution_pair("x", 0)
         self.assertEqual(pair, ([1, 2], [0, 0, 0, 0, 0]))
@@ -18,7 +18,7 @@ class TestPerformance(unittest.TestCase):
         self.assertEqual(pair, ([1, 1, 1], [0, 0, 0, 0, 0]))
 
     def test_performance_test_run(self):
-        test_file = "puzzles/test/nonogram_trivial.json"
+        test_file = "test/puzzles/nonogram_trivial.json"
         test = performance.Performance_Test(trivial.TrivialSolver, test_file)
         test.run()
         pair = test.solver.get_clue_solution_pair("x", 0)
@@ -28,14 +28,14 @@ class TestPerformance(unittest.TestCase):
 
     def test_test_runner_timing_test(self):
         test = performance.Test_Runner(trivial.TrivialSolver)
-        test.run_timing_test("puzzles/test/nonogram_trivial.json")
-        self.assertIn("puzzles/test/nonogram_trivial.json",
+        test.run_timing_test("test/puzzles/nonogram_trivial.json")
+        self.assertIn("test/puzzles/nonogram_trivial.json",
                       test.timing_results)
 
     def test_test_runner_correct_test(self):
         test = performance.Test_Runner(trivial.TrivialSolver)
-        test.run_correctness_test("puzzles/test/nonogram_trivial.json")
-        self.assertIn("puzzles/test/nonogram_trivial.json",
+        test.run_correctness_test("test/puzzles/nonogram_trivial.json")
+        self.assertIn("test/puzzles/nonogram_trivial.json",
                       test.correct_results)
 
 
