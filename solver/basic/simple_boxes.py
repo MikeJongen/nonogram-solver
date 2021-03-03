@@ -21,7 +21,12 @@ class SimpleBoxesSolver(Nonogram):
                 *self.get_clue_solution_pair("y", index)))
 
     def solve(self):
-        """only solves rows/columns which have one possible solution"""
+        """
+        Applies simple boxes algorithm to rows.
+
+        Does not require to update rows before solving, as this algorithm
+        does not use information from the solution.
+        """
         for index, row_solver in enumerate(self.row_solver_y):
             changed = row_solver.solve_simple_boxes()
             if changed:
