@@ -8,9 +8,7 @@ class SimpleBoxesSolver(Nonogram):
     Solver class to apply simple boxes algorithm.
     """
 
-    def __init__(self, size_x=0, size_y=0, file=None):
-        Nonogram.__init__(self, size_x, size_y, file)
-
+    def init_row_solvers(self):
         self.row_solver_y = []
         self.row_solver_x = []
         for index in range(self.size["y"]):

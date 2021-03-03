@@ -19,10 +19,6 @@ class Nonogram:
         self.clues = dict()
         self.size = dict()
 
-        # These need to be initialized for reset solution function
-        self.row_solver_y = None
-        self.row_solver_x = None
-
         if file == None:
             # Create empty Nonogram
             self.size["x"] = size_x
@@ -35,6 +31,13 @@ class Nonogram:
         else:
             # Load from file
             self.load(file)
+
+        self.init_row_solvers()
+
+    def init_row_solvers(self):
+        # These need to be initialized for reset solution function
+        self.row_solver_y = None
+        self.row_solver_x = None
 
     def set_clues_x(self, *clues):
         """
