@@ -78,12 +78,12 @@ class Test_Runner:
             total_cells_sum += self.correct_results[key]["total_cells"]
             completed_cells_sum += self.correct_results[key]["cells_known"]
         print("-------------------------------")
-        print("Total complete: {}% ({}/{})".format(completed_sum /
-                                                   total_sum * 100, completed_sum, total_sum))
-        print("Total cells completed: {}% ({}/{})".format(completed_cells_sum /
-                                                          total_cells_sum * 100, completed_cells_sum, total_cells_sum))
-        print("Completed correct: {}% ({}/{})".format(correct_sum /
-                                                      completed_sum * 100, correct_sum, completed_sum))
+        print("Total complete: {:3.2f}% ({}/{})".format(completed_sum /
+                                                        total_sum * 100, completed_sum, total_sum))
+        print("Total cells completed: {:3.2f}% ({}/{})".format(completed_cells_sum /
+                                                               total_cells_sum * 100, completed_cells_sum, total_cells_sum))
+        print("Completed correct: {:3.2f}% ({}/{})".format(correct_sum /
+                                                           completed_sum * 100, correct_sum, completed_sum))
         total_sum = 0
         for key in self.timing_results:
             total_sum += 1
