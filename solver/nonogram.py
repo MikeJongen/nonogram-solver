@@ -34,10 +34,20 @@ class Nonogram:
 
         self.init_row_solvers()
 
-    def init_row_solvers(self):
-        # These need to be initialized for reset solution function
-        self.row_solver_y = None
-        self.row_solver_x = None
+    def init_row_solvers(self, solver_class=None):
+        if None == solver_class:
+            # These need to be initialized for reset solution function
+            self.row_solver_y = None
+            self.row_solver_x = None
+        else:
+            self.row_solver_y = []
+            self.row_solver_x = []
+            for index in range(self.size["y"]):
+                self.row_solver_y.append(solver_class(
+                    *self.get_clue_solution_pair("x", index)))
+            for index in range(self.size["x"]):
+                self.row_solver_x.append(solver_class(
+                    *self.get_clue_solution_pair("y", index)))
 
     def set_clues_x(self, *clues):
         """
