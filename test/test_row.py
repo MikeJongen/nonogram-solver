@@ -37,6 +37,14 @@ class TestRow(unittest.TestCase):
         row.values = [1, 1, 1, 1, 1, -1, 1, 1, 1, 1]
         self.assertTrue(row.is_correct())
 
+    def test_reset(self):
+        row = nonogram.Row([5, 4], [1, 1, 1, 1, 1, -1, 1, 1, 1, 1])
+        row.solved = True
+        self.assertEqual(row.solved, True)
+        row.reset()
+        self.assertEqual(row.values, [0] * 10)
+        self.assertEqual(row.solved, False)
+
 
 if __name__ == '__main__':
     unittest.main()
