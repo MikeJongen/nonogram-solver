@@ -11,20 +11,28 @@ class TrivialSolver(Nonogram):
     For example, empty rows or completely filled rows.
     """
 
+    def __init__(self, size_x=0, size_y=0, file=None):
+        Nonogram.__init__(self, size_x, size_y, file)
+
+        self.row_solver_y = []
+        self.row_solver_x = []
+        for index in range(self.size["y"]):
+            self.row_solver_y.append(TrivialRowSolver(
+                *self.get_clue_solution_pair("x", index)))
+        for index in range(self.size["x"]):
+            self.row_solver_x.append(TrivialRowSolver(
+                *self.get_clue_solution_pair("y", index)))
+
     def solve(self):
         """only solves rows/columns which have one possible solution"""
-        for index in range(self.size["y"]):
-            row = TrivialRowSolver(
-                *self.get_clue_solution_pair("x", index))
-            changed = row.solve_defined_row()
+        for index, row_solver in enumerate(self.row_solver_y):
+            changed = row_solver.solve_defined_row()
             if changed:
-                self._set_solution_row("x", index, row.values)
-        for index in range(self.size["x"]):
-            row = TrivialRowSolver(
-                *self.get_clue_solution_pair("y", index))
-            changed = row.solve_defined_row()
+                self._set_solution_row("x", index, row_solver.values)
+        for index, row_solver in enumerate(self.row_solver_x):
+            changed = row_solver.solve_defined_row()
             if changed:
-                self._set_solution_row("y", index, row.values)
+                self._set_solution_row("y", index, row_solver.values)
 
 
 class TrivialRowSolver(Row):
