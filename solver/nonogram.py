@@ -171,7 +171,7 @@ class Nonogram:
             raise AxisError
 
     def _set_solution_row(self, axis, row_index, solution_row,
-                          forced=True):
+                          forced=False):
         """
         sets row/column to new value.
 
