@@ -68,6 +68,7 @@ class Test_Runner:
         correct_sum = 0
         total_cells_sum = 0
         completed_cells_sum = 0
+        total_time = 0.0
         for key in self.correct_results:
             total_sum += 1
             done = self.correct_results[key]["done"]
@@ -83,6 +84,11 @@ class Test_Runner:
                                                           total_cells_sum * 100, completed_cells_sum, total_cells_sum))
         print("Completed correct: {}% ({}/{})".format(correct_sum /
                                                       completed_sum * 100, correct_sum, completed_sum))
+        total_sum = 0
+        for key in self.timing_results:
+            total_sum += 1
+            total_time += self.timing_results[key]
+        print("Total time: {:8.5f} ms)".format(total_time))
 
 
 if __name__ == '__main__':
