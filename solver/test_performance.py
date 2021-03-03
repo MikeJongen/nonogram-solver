@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.abspath(test_path))  # nopep8
 
 from solver.basic import trivial
 from solver.basic import simple_boxes
+from solver import solver
 import timeit
 
 
@@ -103,6 +104,16 @@ if __name__ == '__main__':
     testrunner.print_summary()
 
     testrunner = Test_Runner(simple_boxes.SimpleBoxesSolver)
+    for filename in os.listdir("puzzles/easy"):
+        puzzle_file = "puzzles/easy/" + filename
+        testrunner.run_correctness_test(puzzle_file)
+        testrunner.run_timing_test(puzzle_file)
+        print("\nPuzzle: " + filename.strip(".txt"))
+        testrunner.print_correctness(puzzle_file)
+        testrunner.print_timing(puzzle_file)
+    testrunner.print_summary()
+
+    testrunner = Test_Runner(solver.NonogramSolver)
     for filename in os.listdir("puzzles/easy"):
         puzzle_file = "puzzles/easy/" + filename
         testrunner.run_correctness_test(puzzle_file)
