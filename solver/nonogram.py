@@ -19,6 +19,10 @@ class Nonogram:
         self.clues = dict()
         self.size = dict()
 
+        # These need to be initialized for reset solution function
+        self.row_solver_y = None
+        self.row_solver_x = None
+
         if file == None:
             # Create empty Nonogram
             self.size["x"] = size_x
@@ -120,6 +124,12 @@ class Nonogram:
     def reset_solution(self):
         self.solution = [[0 for y in range(self.size["y"])]
                          for x in range(self.size["x"])]
+        if self.row_solver_y is not None:
+            for solver in self.row_solver_y:
+                solver.reset()
+        if self.row_solver_x is not None:
+            for solver in self.row_solver_x:
+                solver.reset()
 
     def print_solution(self):
         top_row = "+" + self.size["x"] * "--+"
@@ -272,3 +282,7 @@ class Row:
         if reconstructed_clue != self.clues:
             return False
         return True
+
+    def reset(self):
+        self.values = [0] * self.size
+        self.solved = False
