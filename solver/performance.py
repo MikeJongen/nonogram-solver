@@ -38,7 +38,7 @@ class Test_Runner:
             self.run_correctness_test(puzzle_file)
             self.run_timing_test(puzzle_file)
             if verbose:
-                print("\nPuzzle: " + filename.strip(".json"))
+                print("\nPuzzle: " + filename)
                 self.print_correctness(puzzle_file)
                 self.print_timing(puzzle_file)
         if verbose:
