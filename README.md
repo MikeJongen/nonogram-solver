@@ -15,7 +15,7 @@ in this tutorial.
 A nonogram can be created manually or by loading a json file.
 #### Manual creation
 ```
-# Import library
+# Import required classes
 from solver.compound.balanced import BalancedSolver
 # Create puzzle of size 5 by 5
 puzzle = BalancedSolver(5, 5)
@@ -30,7 +30,7 @@ puzzle.save("puzzles/new_puzzle.json")
 
 #### Loading a file
 ```
-# Import library
+# Import required classes
 from solver.compound.balanced import BalancedSolver
 # Load puzzle from file
 puzzle = BalancedSolver(file="puzzles/easy/pyramid.json")
@@ -71,6 +71,23 @@ puzzle.save("puzzles/new_puzzle.json")
 
 # Reset the solution
 puzzle.reset_solution()
+```
+
+## Other solvers
+### Test solvers
+The performance module has some functionality to test and compare different solver classes
+```
+# Import required classes
+from solver.performance import TestRunner
+from solver.compound.balanced import BalancedSolver
+# Create a test runnner
+testrunner = TestRunner(BalancedSolver)
+# Run the tests
+testrunner.run()
+# Use a different test set
+testrunner.run(path="puzzles/hard/")
+# Show the results for all puzzles
+testrunner.run(verbose=True)
 ```
 
 ## Unit Tests
