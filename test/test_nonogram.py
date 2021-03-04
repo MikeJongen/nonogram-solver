@@ -268,6 +268,17 @@ class TestNonogram(unittest.TestCase):
                           [0, 0, 0, 0, 0]]
         self.assertEqual(new_nonogram.solution, empty_solution)
 
+    def test_change_clues(self):
+        puzzle = nonogram.Nonogram(5, 6)
+        x_clues = [[1, 2], [1, 1], [1, 3], [1], [1, 2], []]
+        y_clues = [[5], [], [3, 1], [1, 1, 1], [1]]
+        puzzle.set_clues_x(*x_clues)
+        puzzle.set_clues_y(*y_clues)
+        for index, clue in enumerate(y_clues):
+            self.assertEqual(puzzle.row_solver_y[index].clues, clue)
+        for index, clue in enumerate(x_clues):
+            self.assertEqual(puzzle.row_solver_x[index].clues, clue)
+
 
 if __name__ == '__main__':
     unittest.main()
