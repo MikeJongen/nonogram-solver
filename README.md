@@ -80,7 +80,7 @@ The performance module has some functionality to test and compare different solv
 # Import required classes
 from solver.performance import TestRunner
 from solver.compound.balanced import BalancedSolver
-# Create a test runnner
+# Create a test runner, testing the BalancedSolver
 testrunner = TestRunner(BalancedSolver)
 # Run the tests
 testrunner.run()
