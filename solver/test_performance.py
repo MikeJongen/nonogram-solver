@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(test_path))  # nopep8
 
 from solver.basic import trivial
 from solver.basic import simple_boxes
-from solver import nonogram_solver
+from solver.compound import balanced
 import timeit
 
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
         testrunner.print_timing(puzzle_file)
     testrunner.print_summary()
 
-    testrunner = Test_Runner(nonogram_solver.NonogramSolver)
+    testrunner = Test_Runner(balanced.BalancedSolver)
     for filename in os.listdir("puzzles/easy"):
         puzzle_file = "puzzles/easy/" + filename
         testrunner.run_correctness_test(puzzle_file)

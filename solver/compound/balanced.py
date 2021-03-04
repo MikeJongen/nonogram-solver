@@ -8,13 +8,13 @@ from solver.basic.simple_boxes import SimpleBoxesSolver, SimpleBoxesRowSolver
 from solver.basic.trivial import TrivialSolver, TrivialRowSolver
 
 
-class NonogramSolver(TrivialSolver, SimpleBoxesSolver, Nonogram):
+class BalancedSolver(TrivialSolver, SimpleBoxesSolver, Nonogram):
     """
     Solver class to combine all solver classes.
     """
 
     def init_row_solvers(self):
-        Nonogram.init_row_solvers(self, RowSolver)
+        Nonogram.init_row_solvers(self, BalancedRowSolver)
 
     def solve(self):
         """
@@ -24,5 +24,5 @@ class NonogramSolver(TrivialSolver, SimpleBoxesSolver, Nonogram):
         SimpleBoxesSolver.solve(self)
 
 
-class RowSolver(TrivialRowSolver, SimpleBoxesRowSolver, Row):
+class BalancedRowSolver(TrivialRowSolver, SimpleBoxesRowSolver, Row):
     pass
