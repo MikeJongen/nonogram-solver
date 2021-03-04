@@ -31,6 +31,20 @@ class Test_Runner:
         self.timing_results = dict()
         self.correct_results = dict()
 
+    def run(self, path="puzzles/easy/", verbose=False):
+        print("\nRunning performance test for {}".format(self.solver.__name__))
+        for filename in os.listdir(path):
+            puzzle_file = path + filename
+            self.run_correctness_test(puzzle_file)
+            self.run_timing_test(puzzle_file)
+            if verbose:
+                print("\nPuzzle: " + filename.strip(".json"))
+                self.print_correctness(puzzle_file)
+                self.print_timing(puzzle_file)
+        if verbose:
+            print("-------------------------------")
+        self.print_summary()
+
     def run_timing_test(self, puzzle):
         setup = ("from solver.test_performance import Performance_Test\n"
                  "import solver\n"
@@ -78,7 +92,6 @@ class Test_Runner:
                 correct_sum += self.correct_results[key]["correct"]
             total_cells_sum += self.correct_results[key]["total_cells"]
             completed_cells_sum += self.correct_results[key]["cells_known"]
-        print("-------------------------------")
         print("Total complete: {:3.2f}% ({}/{})".format(completed_sum /
                                                         total_sum * 100, completed_sum, total_sum))
         print("Total cells completed: {:3.2f}% ({}/{})".format(completed_cells_sum /
@@ -94,31 +107,10 @@ class Test_Runner:
 
 if __name__ == '__main__':
     testrunner = Test_Runner(trivial.TrivialSolver)
-    for filename in os.listdir("puzzles/easy"):
-        puzzle_file = "puzzles/easy/" + filename
-        testrunner.run_correctness_test(puzzle_file)
-        testrunner.run_timing_test(puzzle_file)
-        print("\nPuzzle: " + filename.strip(".txt"))
-        testrunner.print_correctness(puzzle_file)
-        testrunner.print_timing(puzzle_file)
-    testrunner.print_summary()
+    testrunner.run()
 
     testrunner = Test_Runner(simple_boxes.SimpleBoxesSolver)
-    for filename in os.listdir("puzzles/easy"):
-        puzzle_file = "puzzles/easy/" + filename
-        testrunner.run_correctness_test(puzzle_file)
-        testrunner.run_timing_test(puzzle_file)
-        print("\nPuzzle: " + filename.strip(".txt"))
-        testrunner.print_correctness(puzzle_file)
-        testrunner.print_timing(puzzle_file)
-    testrunner.print_summary()
+    testrunner.run()
 
     testrunner = Test_Runner(balanced.BalancedSolver)
-    for filename in os.listdir("puzzles/easy"):
-        puzzle_file = "puzzles/easy/" + filename
-        testrunner.run_correctness_test(puzzle_file)
-        testrunner.run_timing_test(puzzle_file)
-        print("\nPuzzle: " + filename.strip(".txt"))
-        testrunner.print_correctness(puzzle_file)
-        testrunner.print_timing(puzzle_file)
-    testrunner.print_summary()
+    testrunner.run(verbose=True)
