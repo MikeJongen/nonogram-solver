@@ -6,14 +6,19 @@ This project was last tested with python 3.8.5.
 No external libraries are required.
 
 ## Tutorial
+Note: This project includes several solver classes. For this tutorial, we use 
+the compound.balanced solver, as this is the most generic solver. The other solvers
+are more specialized or limited, but still use the same methods as shown
+in this tutorial. 
+
 ### Create nonogram.
 A nonogram can be created manually or by loading a json file.
 #### Manual creation
 ```
 # Import library
-from solver.nonogram_solver import NonogramSolver
+from solver.compound.balanced import BalancedSolver
 # Create puzzle of size 5 by 5
-puzzle = NonogramSolver(5, 5)
+puzzle = BalancedSolver(5, 5)
 # Set clues for the (horizontal) rows
 puzzle.set_clues_x([1, 2], [1, 1], [1, 3], [1], [1, 2])
 # Set clues for the (vertical) columns
@@ -26,9 +31,9 @@ puzzle.save("puzzles/new_puzzle.json")
 #### Loading a file
 ```
 # Import library
-from solver.nonogram_solver import NonogramSolver
+from solver.compound.balanced import BalancedSolver
 # Load puzzle from file
-puzzle = NonogramSolver(file="puzzles/easy/pyramid.json")
+puzzle = BalancedSolver(file="puzzles/easy/pyramid.json")
 ```
 
 ### Solving a puzzle
