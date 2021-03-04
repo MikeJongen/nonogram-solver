@@ -1,6 +1,10 @@
 # nonogram-solver
 script to solve nonogram puzzles
 
+## Requirements
+This project was last tested with python 3.8.5. 
+No external libraries are required.
+
 ## Tutorial
 ### Create nonogram.
 A nonogram can be created manually or by loading a json file.
