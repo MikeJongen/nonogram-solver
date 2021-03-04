@@ -46,7 +46,7 @@ class Test_Runner:
         self.print_summary()
 
     def run_timing_test(self, puzzle):
-        setup = ("from solver.test_performance import Performance_Test\n"
+        setup = ("from solver.performance import Performance_Test\n"
                  "import solver\n"
                  "test = Performance_Test("
                  + self.solver.__module__ + "." + self.solver.__name__ +
