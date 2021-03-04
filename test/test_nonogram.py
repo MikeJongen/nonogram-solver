@@ -275,9 +275,9 @@ class TestNonogram(unittest.TestCase):
         puzzle.set_clues_x(*x_clues)
         puzzle.set_clues_y(*y_clues)
         for index, clue in enumerate(y_clues):
-            self.assertEqual(puzzle.row_solver_y[index].clues, clue)
+            self.assertEqual(puzzle.row_solver["y"][index].clues, clue)
         for index, clue in enumerate(x_clues):
-            self.assertEqual(puzzle.row_solver_x[index].clues, clue)
+            self.assertEqual(puzzle.row_solver["x"][index].clues, clue)
 
 
 if __name__ == '__main__':

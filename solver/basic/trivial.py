@@ -16,14 +16,14 @@ class TrivialSolver(Nonogram):
 
     def solve(self):
         """only solves rows/columns which have one possible solution"""
-        for index, row_solver in enumerate(self.row_solver_y):
-            changed = row_solver.solve_defined_row()
-            if changed:
-                self._set_solution_row("x", index, row_solver.values)
-        for index, row_solver in enumerate(self.row_solver_x):
+        for index, row_solver in enumerate(self.row_solver["y"]):
             changed = row_solver.solve_defined_row()
             if changed:
                 self._set_solution_row("y", index, row_solver.values)
+        for index, row_solver in enumerate(self.row_solver["x"]):
+            changed = row_solver.solve_defined_row()
+            if changed:
+                self._set_solution_row("x", index, row_solver.values)
 
 
 class TrivialRowSolver(Row):

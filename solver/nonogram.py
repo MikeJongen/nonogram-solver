@@ -38,13 +38,14 @@ class Nonogram:
         if None == solver_class:
             # Use default
             solver_class = Row
-        self.row_solver_y = []
-        self.row_solver_x = []
+        self.row_solver = dict()
+        self.row_solver["x"] = []
+        self.row_solver["y"] = []
         for index in range(self.size["y"]):
-            self.row_solver_x.append(solver_class(
+            self.row_solver["x"].append(solver_class(
                 *self.get_clue_solution_pair("x", index)))
         for index in range(self.size["x"]):
-            self.row_solver_y.append(solver_class(
+            self.row_solver["y"].append(solver_class(
                 *self.get_clue_solution_pair("y", index)))
 
     def set_clues_x(self, *clues):
@@ -136,11 +137,10 @@ class Nonogram:
     def reset_solution(self):
         self.solution = [[0 for y in range(self.size["y"])]
                          for x in range(self.size["x"])]
-        if self.row_solver_y is not None:
-            for solver in self.row_solver_y:
+        if self.row_solver is not None:
+            for solver in self.row_solver["y"]:
                 solver.reset()
-        if self.row_solver_x is not None:
-            for solver in self.row_solver_x:
+            for solver in self.row_solver["x"]:
                 solver.reset()
 
     def print_solution(self):
