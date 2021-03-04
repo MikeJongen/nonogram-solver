@@ -9,7 +9,7 @@ from solver.compound import balanced
 import timeit
 
 
-class Performance_Test:
+class PerformanceTest:
     def __init__(self, solver_class, puzzle_file):
         self.solver = solver_class(file=puzzle_file)
 
@@ -25,7 +25,7 @@ class Performance_Test:
                 "correct": self.solver.is_correct()}
 
 
-class Test_Runner:
+class TestRunner:
     def __init__(self, solver_class):
         self.solver = solver_class
         self.timing_results = dict()
@@ -46,9 +46,9 @@ class Test_Runner:
         self.print_summary()
 
     def run_timing_test(self, puzzle):
-        setup = ("from solver.performance import Performance_Test\n"
+        setup = ("from solver.performance import PerformanceTest\n"
                  "import solver\n"
-                 "test = Performance_Test("
+                 "test = PerformanceTest("
                  + self.solver.__module__ + "." + self.solver.__name__ +
                  ", "
                  "\"" + puzzle + "\""
@@ -63,7 +63,7 @@ class Test_Runner:
         print("Time = {:8.5f} ms".format(self.timing_results[puzzle]))
 
     def run_correctness_test(self, puzzle):
-        test = Performance_Test(self.solver, puzzle)
+        test = PerformanceTest(self.solver, puzzle)
         test.run()
         self.correct_results[puzzle] = test.get_results()
 
@@ -106,11 +106,11 @@ class Test_Runner:
 
 
 if __name__ == '__main__':
-    testrunner = Test_Runner(trivial.TrivialSolver)
+    testrunner = TestRunner(trivial.TrivialSolver)
     testrunner.run()
 
-    testrunner = Test_Runner(simple_boxes.SimpleBoxesSolver)
+    testrunner = TestRunner(simple_boxes.SimpleBoxesSolver)
     testrunner.run()
 
-    testrunner = Test_Runner(balanced.BalancedSolver)
+    testrunner = TestRunner(balanced.BalancedSolver)
     testrunner.run(verbose=True)
