@@ -33,6 +33,7 @@ class TestRunner:
 
     def run(self, path="puzzles/easy/", verbose=False):
         print("\nRunning performance test for {}".format(self.solver.__name__))
+        print("Using directory: {}".format(path))
         for filename in os.listdir(path):
             puzzle_file = path + filename
             self.run_correctness_test(puzzle_file)
