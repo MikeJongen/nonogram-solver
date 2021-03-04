@@ -3,11 +3,15 @@ from solver.nonogram import Row
 from solver.error import *
 
 
-class BasicSolver(Nonogram):
-    """simple solver class
+class BruteForceSolver(Nonogram):
+    """Brute force solver class
 
-    First try at a solver class.
+    Performance heavy algorithm, use as last option
     """
+
+    def solve(self):
+        # TODO: create
+        pass
 
     def fill_common_elements_row(self, input_axis, index):
         """Fills all elements which are common for all solutions"""
