@@ -58,9 +58,11 @@ puzzle.print_solution()
 ```
 
 Note: legend for the solution print:  
-XX is a filled cell  
-.. is a blank cell  
-   is a unknown cell  
+```
+'XX' is a filled cell  
+'..' is a blank cell  
+'  ' is a unknown cell  
+```
 
 ### Other functions
 ```
