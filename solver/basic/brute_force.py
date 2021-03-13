@@ -106,3 +106,20 @@ class BruteForceRowSolver(Row):
                 total = self._list_of_solutions(total, solution,
                                                 clue[1:], new_size)
             return total
+
+    def _check_solution(self, solution):
+        """
+        Checks if the solution given fits the current solution of the row.
+
+        Assumes solution has no unknown values.
+        Does not check if solution fits clues.
+        Returns True if solution fits (no differences in known values)
+        Returns False if solution does not fit
+        """
+        for new_value, current_value in zip(solution, self.values):
+            if current_value == 0:
+                continue
+            elif new_value == current_value:
+                continue
+            return False
+        return True

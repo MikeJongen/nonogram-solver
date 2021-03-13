@@ -62,6 +62,13 @@ class TestBasic(unittest.TestCase):
         solutions = row._get_all_solutions()
         self.assertEqual(solutions, expected_solutions)
 
+    def test_check_solutions(self):
+        row = brute_force.BruteForceRowSolver([2, 1], [1, 0, 0, 0, 0])
+        valid = row._check_solution([1, 1, 0, 1, 0])
+        self.assertTrue(valid)
+        valid = row._check_solution([0, 1, 1, 0, 1])
+        self.assertFalse(valid)
+
     # def test_fillcommonelementsrow(self):
     #     new_nonogram = brute_force.BruteForceSolver(10, 5)
     #     clues_y = [[4], [2, 2], [5], [5], [2, 1],
