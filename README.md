@@ -2,7 +2,7 @@
 script to solve nonogram puzzles
 
 ## Requirements
-This project was last tested with python 3.8.5. 
+This project requires python 3.6 or higher.  
 No external libraries are required.
 
 ## Tutorial
