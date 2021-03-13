@@ -34,6 +34,34 @@ class TestBasic(unittest.TestCase):
         no_solutions = row._get_number_of_solutions()
         self.assertEqual(no_solutions, 1)
 
+    def test_get_all_solutions(self):
+        row = brute_force.BruteForceRowSolver([2, 1], [0] * 5)
+        expected_solutions = [
+            [1, 1, -1, 1, -1],
+            [1, 1, -1, -1, 1],
+            [-1, 1, 1, -1, 1],
+        ]
+        solutions = row._get_all_solutions()
+        self.assertEqual(solutions, expected_solutions)
+
+    def test_get_all_solutions_one_clue(self):
+        row = brute_force.BruteForceRowSolver([3], [0] * 5)
+        expected_solutions = [
+            [1, 1, 1, -1, -1],
+            [-1, 1, 1, 1, -1],
+            [-1, -1, 1, 1, 1],
+        ]
+        solutions = row._get_all_solutions()
+        self.assertEqual(solutions, expected_solutions)
+
+    def test_get_all_solutions_empty(self):
+        row = brute_force.BruteForceRowSolver([], [0] * 5)
+        expected_solutions = [
+            [-1, -1, -1, -1, -1],
+        ]
+        solutions = row._get_all_solutions()
+        self.assertEqual(solutions, expected_solutions)
+
     # def test_fillcommonelementsrow(self):
     #     new_nonogram = brute_force.BruteForceSolver(10, 5)
     #     clues_y = [[4], [2, 2], [5], [5], [2, 1],

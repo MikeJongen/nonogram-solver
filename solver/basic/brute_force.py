@@ -23,48 +23,6 @@ class BruteForceSolver(Nonogram):
                                                        row_solution)
         self._set_solution_row(input_axis, index, row_solution)
 
-    def get_all_solutions(self, input_axis, index):
-        """Returns a list with all possible solutions for the row"""
-        cur_clue = self.clues[input_axis][index]
-        row_size = self.size[input_axis]
-
-        solutions_list = []
-        return self._list_of_solutions(solutions_list, [],
-                                       cur_clue, row_size)
-
-    def _list_of_solutions(self, total, start, clue, size):
-        if len(clue) == 0:
-            solution = []
-            for i in range(size):
-                solution.append(-1)
-            total.append(solution)
-            return total
-        elif len(clue) == 1:
-            no_solutions = size - clue[0] + 1
-            for solution_no in range(no_solutions):
-                solution = start[:]
-                for i in range(solution_no):
-                    solution.append(-1)
-                for i in range(clue[0]):
-                    solution.append(1)
-                for i in range(size - clue[0] - solution_no):
-                    solution.append(-1)
-                total.append(solution)
-            return total
-        else:
-            no_solutions = size - clue[0] + 1
-            for solution_no in range(no_solutions):
-                solution = start[:]
-                for i in range(solution_no):
-                    solution.append(-1)
-                for i in range(clue[0]):
-                    solution.append(1)
-                solution.append(-1)
-                new_size = size - clue[0] - solution_no - 1
-                total = self._list_of_solutions(total, solution,
-                                                clue[1:], new_size)
-            return total
-
     def _get_matching_solution(self, row1, row2):
         if len(row1) != len(row2):
             raise LengthError
@@ -111,3 +69,40 @@ class BruteForceRowSolver(Row):
             for i in range(movement_space + 1):
                 solutions += self._number_of_solutions(i, no_clues - 1)
             return solutions
+
+    def _get_all_solutions(self):
+        """
+        Returns a list with all possible solutions for the row
+        """
+
+        solutions_list = []
+        return self._list_of_solutions(solutions_list, [], self.clues, self.size)
+
+    def _list_of_solutions(self, total, start, clue, size):
+        if len(clue) == 0:
+            # empty row. Return one solution with all empty cells
+            total.append([-1] * size)
+            return total
+        elif len(clue) == 1:
+            # one clue left. Check empty cell count, and move clue over these cells
+            empty_cells = size - clue[0] + 1
+            for empty_start_cells in range(empty_cells):
+                solution = start[:]
+                solution += [-1] * empty_start_cells
+                solution += [1] * clue[0]
+                solution += [-1] * (size - clue[0] - empty_start_cells)
+                total.append(solution)
+            return total
+        else:
+            # Multiple clues left. Check empty cell count, and move first clue over these cells
+            # Then, recursively call this function to find the possible positions of the other clues
+            empty_cells = size - clue[0] + 1
+            for empty_start_cells in range(empty_cells):
+                solution = start[:]
+                solution += [-1] * empty_start_cells
+                solution += [1] * clue[0]
+                solution += [-1]
+                new_size = size - clue[0] - empty_start_cells - 1
+                total = self._list_of_solutions(total, solution,
+                                                clue[1:], new_size)
+            return total
