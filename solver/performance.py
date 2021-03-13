@@ -101,7 +101,7 @@ class TestRunner:
         for key in self.timing_results:
             total_sum += 1
             total_time += self.timing_results[key]
-        print("Total time: {:8.5f} ms)".format(total_time))
+        print("Total time: {:8.5f} ms".format(total_time))
 
 
 if __name__ == '__main__':
