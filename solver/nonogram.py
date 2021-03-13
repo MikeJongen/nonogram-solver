@@ -92,10 +92,10 @@ class Nonogram:
 
     def update_row_solvers(self):
         """
-        Updates all row solvers with the overall solution, so rows get info from columns 
-        and vice versa. Does not check if new info fits with old info, and does not update 
+        Updates all row solvers with the overall solution, so rows get info from columns
+        and vice versa. Does not check if new info fits with old info, and does not update
         completed rows.
-        """  # noqa
+        """
         for axis in self.row_solver:
             for index, row_solver in enumerate(self.row_solver[axis]):
                 if row_solver.solved:

@@ -3,12 +3,12 @@ from solver.nonogram import Row
 
 
 class TrivialSolver(Nonogram):
-    """Solver class to solve trivial rows. 
+    """Solver class to solve trivial rows.
 
-    Solves all rows which have a trivial solution. 
-    This means that, using the row clues, only one solution is possible. 
-    For example, empty rows or completely filled rows. 
-    """  # noqa
+    Solves all rows which have a trivial solution.
+    This means that, using the row clues, only one solution is possible.
+    For example, empty rows or completely filled rows.
+    """
 
     def init_row_solvers(self):
         Nonogram.init_row_solvers(self, TrivialRowSolver)
@@ -28,13 +28,13 @@ class TrivialSolver(Nonogram):
 class TrivialRowSolver(Row):
     def solve_defined_row(self):
         """
-        RowSolver for TrivialSolver class. 
+        RowSolver for TrivialSolver class.
 
-        Solves a row/column that has only one possible solution. 
+        Solves a row/column that has only one possible solution.
 
         returnvalue : Bool
             A bool to indicate if the row has been changed. (true if changed)
-        """  # noqa
+        """
         if self.solved:
             return self.values
 
