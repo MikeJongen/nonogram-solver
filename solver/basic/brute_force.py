@@ -19,16 +19,6 @@ class BruteForceSolver(Nonogram):
                 if changed:
                     self._set_solution_row(axis, index, row_solver.values)
 
-    def fill_common_elements_row(self, input_axis, index):
-        """Fills all elements which are common for all solutions"""
-        all_solutions = self.get_all_solutions(input_axis, index)
-        row_solution = all_solutions[0]
-
-        for solution in all_solutions:
-            row_solution = self._get_matching_solution(solution,
-                                                       row_solution)
-        self._set_solution_row(input_axis, index, row_solution)
-
 
 class BruteForceRowSolver(Row):
     def solve_brute_force(self, maximum_solutions=100):
