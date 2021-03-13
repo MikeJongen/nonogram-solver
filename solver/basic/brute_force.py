@@ -25,19 +25,38 @@ class BruteForceSolver(Nonogram):
 
 
 class BruteForceRowSolver(Row):
-    def solve_blanks(self):
+    def solve_brute_force(self, maximum_solutions=100):
         """
         RowSolver for BruteForceSolver class
 
         Tests every possible solution.
 
+        maximum_solutions : int
+            only solve if total number of solutions is lower than this.
         returnvalue : Bool
             A bool to indicate if the row has been changed. (True if changed)
         """
         if self.solved:
-            return self.values
+            return False
 
-        return False
+        number_of_solutions = self._get_number_of_solutions()
+        if number_of_solutions > maximum_solutions:
+            return False
+
+        all_solutions = self._get_all_solutions()
+        new_solution = None
+        for solution in all_solutions:
+            if self._check_solution(solution):
+                if new_solution is None:
+                    new_solution = solution
+                    continue
+                new_solution = self._get_matching_solution(
+                    new_solution, solution)
+        if self.values == new_solution:
+            return False
+        self.values = new_solution
+
+        return True
 
     def _get_number_of_solutions(self):
         """

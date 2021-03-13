@@ -77,6 +77,18 @@ class TestBasic(unittest.TestCase):
         solution = row._get_matching_solution(solution1, solution2)
         self.assertEqual(expected_solution, solution)
 
+    def test_row_brute_force_empty_values(self):
+        row = brute_force.BruteForceRowSolver([2, 1], [0] * 5)
+        changed = row.solve_brute_force()
+        self.assertTrue(changed)
+        self.assertEqual(row.values, [0, 1, 0, 0, 0])
+
+    def test_row_brute_force(self):
+        row = brute_force.BruteForceRowSolver([2, 1], [1, 0, 0, 0, 0])
+        changed = row.solve_brute_force()
+        self.assertTrue(changed)
+        self.assertEqual(row.values, [1, 1, -1, 0, 0])
+
     # def test_fillcommonelementsrow(self):
     #     new_nonogram = brute_force.BruteForceSolver(10, 5)
     #     clues_y = [[4], [2, 2], [5], [5], [2, 1],
