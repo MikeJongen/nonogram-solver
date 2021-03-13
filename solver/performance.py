@@ -107,11 +107,5 @@ class TestRunner:
 
 
 if __name__ == '__main__':
-    testrunner = TestRunner(trivial.TrivialSolver)
-    testrunner.run()
-
-    testrunner = TestRunner(simple_boxes.SimpleBoxesSolver)
-    testrunner.run()
-
     testrunner = TestRunner(balanced.BalancedSolver)
     testrunner.run(verbose=True)
