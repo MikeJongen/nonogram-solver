@@ -1,11 +1,11 @@
 import sys
 import os
-test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
-sys.path.insert(0, os.path.abspath(test_path))  # nopep8
-
-from solver.error import *
-import solver.basic.simple_boxes as simple_boxes
 import unittest
+test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
+sys.path.insert(0, os.path.abspath(test_path))   # noqa
+
+from solver.error import *  # noqa: E402
+import solver.basic.simple_boxes as simple_boxes  # noqa: E402
 
 
 class TestSimpleBoxes(unittest.TestCase):

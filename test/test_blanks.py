@@ -1,11 +1,11 @@
 import sys
 import os
-test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
-sys.path.insert(0, os.path.abspath(test_path))  # nopep8
-
-from solver.error import *
-from solver.basic.blanks import BlanksSolver, BlanksRowSolver
 import unittest
+test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
+sys.path.insert(0, os.path.abspath(test_path))   # noqa
+
+from solver.error import *  # noqa: E402
+from solver.basic.blanks import BlanksSolver, BlanksRowSolver  # noqa: E402
 
 
 class TestBalancedSolver(unittest.TestCase):
