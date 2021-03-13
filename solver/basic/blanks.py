@@ -42,6 +42,7 @@ class BlanksRowSolver(Row):
             for index, value in enumerate(self.values):
                 if value == 0:
                     self.values[index] = -1
+            self.solved = True
             return True
 
         return False
