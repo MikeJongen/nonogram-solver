@@ -23,15 +23,6 @@ class BruteForceSolver(Nonogram):
                                                        row_solution)
         self._set_solution_row(input_axis, index, row_solution)
 
-    def get_number_of_solutions_total(self, input_axis, index):
-        """Returns the number of possible solutions for the row"""
-        cur_clue = self.clues[input_axis][index]
-        length_clue = sum(cur_clue) + len(cur_clue) - 1
-        empty_spaces = self.size[input_axis] - length_clue
-        no_clues = len(cur_clue)
-
-        return self._number_of_solutions(empty_spaces, no_clues)
-
     def get_all_solutions(self, input_axis, index):
         """Returns a list with all possible solutions for the row"""
         cur_clue = self.clues[input_axis][index]
@@ -74,17 +65,6 @@ class BruteForceSolver(Nonogram):
                                                 clue[1:], new_size)
             return total
 
-    def _number_of_solutions(self, empty_spaces, no_clues):
-        if no_clues == 1:
-            return empty_spaces + 1
-        elif no_clues == 0:
-            return 1
-        else:
-            solutions = 0
-            for i in range(empty_spaces + 1):
-                solutions += self._number_of_solutions(i, no_clues - 1)
-            return solutions
-
     def _get_matching_solution(self, row1, row2):
         if len(row1) != len(row2):
             raise LengthError
@@ -95,3 +75,39 @@ class BruteForceSolver(Nonogram):
             else:
                 solution.append(0)
         return solution
+
+
+class BruteForceRowSolver(Row):
+    def solve_blanks(self):
+        """
+        RowSolver for BruteForceSolver class
+
+        Tests every possible solution.
+
+        returnvalue : Bool
+            A bool to indicate if the row has been changed. (True if changed)
+        """
+        if self.solved:
+            return self.values
+
+        return False
+
+    def _get_number_of_solutions(self):
+        """
+        Returns the number of possible solutions for the row.
+        """
+
+        movement_space = self.size - self.clue_size
+
+        return self._number_of_solutions(movement_space, len(self.clues))
+
+    def _number_of_solutions(self, movement_space, no_clues):
+        if no_clues == 1:
+            return movement_space + 1
+        elif no_clues == 0:
+            return 1
+        else:
+            solutions = 0
+            for i in range(movement_space + 1):
+                solutions += self._number_of_solutions(i, no_clues - 1)
+            return solutions
