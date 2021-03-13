@@ -1,6 +1,5 @@
 from solver.nonogram import Nonogram
 from solver.nonogram import Row
-from solver.error import *
 
 
 class BlanksSolver(Nonogram):

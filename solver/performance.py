@@ -1,10 +1,8 @@
 import sys
 import os
-test_path = os.path.join(os.path.dirname(__file__), '../')  # nopep8
-sys.path.insert(0, os.path.abspath(test_path))  # nopep8
+test_path = os.path.join(os.path.dirname(__file__), '../')  # noqa
+sys.path.insert(0, os.path.abspath(test_path))  # noqa
 
-from solver.basic import trivial
-from solver.basic import simple_boxes
 from solver.compound import balanced
 import timeit
 
