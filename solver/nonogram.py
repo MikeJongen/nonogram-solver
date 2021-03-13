@@ -295,6 +295,11 @@ class Row:
             return False
         return True
 
+    def update_values(self, values):
+        self.values = values
+        if self.is_complete():
+            self.solved = True
+
     def reset(self):
         self.values = [0] * self.size
         self.solved = False

@@ -37,6 +37,17 @@ class TestRow(unittest.TestCase):
         row.values = [1, 1, 1, 1, 1, -1, 1, 1, 1, 1]
         self.assertTrue(row.is_correct())
 
+    def test_update_values(self):
+        row = nonogram.Row([3, 4], [0] * 10)
+        updated_values_1 = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1]
+        updated_values_2 = [1, 1, 1, -1, -1, -1, 1, 1, 1, 1]
+        row.update_values(updated_values_1)
+        self.assertEqual(row.values, updated_values_1)
+        self.assertEqual(row.solved, False)
+        row.update_values(updated_values_2)
+        self.assertEqual(row.values, updated_values_2)
+        self.assertEqual(row.solved, True)
+
     def test_reset(self):
         row = nonogram.Row([5, 4], [1, 1, 1, 1, 1, -1, 1, 1, 1, 1])
         row.solved = True
