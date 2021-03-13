@@ -88,6 +88,8 @@ testrunner.run()
 testrunner.run(path="puzzles/hard/")
 # Show the results for all puzzles
 testrunner.run(verbose=True)
+# Change the number of iterations for timing tests (default 10000)
+testrunner.run(iterations=1000)
 ```
 
 ## Unit Tests

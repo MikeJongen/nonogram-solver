@@ -5,6 +5,7 @@ test_path = os.path.join(os.path.dirname(__file__), '../')  # noqa
 sys.path.insert(0, os.path.abspath(test_path))  # noqa
 
 from solver.compound import balanced  # noqa: E402
+from solver.compound import only_brute_force  # noqa: E402
 
 
 class PerformanceTest:
@@ -29,13 +30,13 @@ class TestRunner:
         self.timing_results = dict()
         self.correct_results = dict()
 
-    def run(self, path="puzzles/easy/", verbose=False):
+    def run(self, path="puzzles/easy/", verbose=False, iterations=10000):
         print("\nRunning performance test for {}".format(self.solver.__name__))
         print("Using directory: {}".format(path))
         for filename in os.listdir(path):
             puzzle_file = path + filename
             self.run_correctness_test(puzzle_file)
-            self.run_timing_test(puzzle_file)
+            self.run_timing_test(puzzle_file, iterations)
             if verbose:
                 print("\nPuzzle: " + filename)
                 self.print_correctness(puzzle_file)
@@ -44,7 +45,7 @@ class TestRunner:
             print("-------------------------------")
         self.print_summary()
 
-    def run_timing_test(self, puzzle):
+    def run_timing_test(self, puzzle, iterations=10000):
         setup = ("from solver.performance import PerformanceTest\n"
                  "import solver\n"
                  "test = PerformanceTest("
@@ -52,7 +53,6 @@ class TestRunner:
                  ", "
                  "\"" + puzzle + "\""
                  ")")
-        iterations = 10000
         time = timeit.timeit("test.run()",
                              setup=setup,
                              number=iterations)
@@ -107,3 +107,6 @@ class TestRunner:
 if __name__ == '__main__':
     testrunner = TestRunner(balanced.BalancedSolver)
     testrunner.run(verbose=True)
+
+    testrunner = TestRunner(only_brute_force.OnlyBruteForceSolver)
+    testrunner.run(iterations=1000)
