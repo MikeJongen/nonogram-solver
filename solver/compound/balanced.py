@@ -2,9 +2,10 @@ from solver.nonogram import Nonogram, Row
 from solver.basic.simple_boxes import SimpleBoxesSolver, SimpleBoxesRowSolver
 from solver.basic.trivial import TrivialSolver, TrivialRowSolver
 from solver.basic.blanks import BlanksSolver, BlanksRowSolver
+from solver.basic.brute_force import BruteForceSolver, BruteForceRowSolver
 
 
-class BalancedSolver(BlanksSolver, TrivialSolver, SimpleBoxesSolver, Nonogram):
+class BalancedSolver(BruteForceSolver, BlanksSolver, TrivialSolver, SimpleBoxesSolver, Nonogram):
     """
     Solver class to combine all solver classes.
     """
@@ -19,12 +20,12 @@ class BalancedSolver(BlanksSolver, TrivialSolver, SimpleBoxesSolver, Nonogram):
         TrivialSolver.solve(self)
         SimpleBoxesSolver.solve(self)
 
-        if self.is_complete():
-            return
+        while not self.is_complete():
+            self.update_row_solvers()
+            BlanksSolver.solve(self)
+            self.update_row_solvers()
+            BruteForceSolver.solve(self)
 
-        self.update_row_solvers()
-        BlanksSolver.solve(self)
 
-
-class BalancedRowSolver(BlanksRowSolver, TrivialRowSolver, SimpleBoxesRowSolver, Row):
+class BalancedRowSolver(BruteForceRowSolver, BlanksRowSolver, TrivialRowSolver, SimpleBoxesRowSolver, Row):
     pass
