@@ -35,7 +35,7 @@ class BlanksRowSolver(Row):
             A bool to indicate if the row has been changed. (true if changed)
         """
         if self.solved:
-            return self.values
+            return False
 
         if self._reconstruct_clues() == self.clues:
             for index, value in enumerate(self.values):

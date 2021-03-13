@@ -38,7 +38,7 @@ class SimpleBoxesRowSolver(Row):
             A bool to indicate if the row has been changed. (true if changed)
         """
         if self.solved:
-            return self.values
+            return False
 
         movement_space = self.size - self.clue_size
 
