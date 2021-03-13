@@ -89,6 +89,16 @@ class TestBasic(unittest.TestCase):
         self.assertTrue(changed)
         self.assertEqual(row.values, [1, 1, -1, 0, 0])
 
+    def test_brute_force(self):
+        puzzle = brute_force.BruteForceSolver(file="test/puzzles/stairs.json")
+        puzzle.solve()
+        puzzle.update_row_solvers()
+        puzzle.solve()
+        puzzle.update_row_solvers()
+        puzzle.solve()
+        self.assertTrue(puzzle.is_complete())
+        self.assertTrue(puzzle.is_correct())
+
     # def test_fillcommonelementsrow(self):
     #     new_nonogram = brute_force.BruteForceSolver(10, 5)
     #     clues_y = [[4], [2, 2], [5], [5], [2, 1],
