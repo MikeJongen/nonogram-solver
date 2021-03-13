@@ -93,6 +93,9 @@ class Nonogram:
     def update_row_solvers(self):
         for axis in self.row_solver:
             for index, row_solver in enumerate(self.row_solver[axis]):
+                if row_solver.solved:
+                    # don't waste time updating completed rows
+                    continue
                 row_solver.update_values(self._get_solution_row(axis, index))
 
     def is_complete(self) -> bool:
