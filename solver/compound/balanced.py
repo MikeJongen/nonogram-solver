@@ -6,9 +6,10 @@ sys.path.insert(0, os.path.abspath(test_path))  # nopep8
 from solver.nonogram import Nonogram, Row
 from solver.basic.simple_boxes import SimpleBoxesSolver, SimpleBoxesRowSolver
 from solver.basic.trivial import TrivialSolver, TrivialRowSolver
+from solver.basic.blanks import BlanksSolver, BlanksRowSolver
 
 
-class BalancedSolver(TrivialSolver, SimpleBoxesSolver, Nonogram):
+class BalancedSolver(BlanksSolver, TrivialSolver, SimpleBoxesSolver, Nonogram):
     """
     Solver class to combine all solver classes.
     """
@@ -23,6 +24,12 @@ class BalancedSolver(TrivialSolver, SimpleBoxesSolver, Nonogram):
         TrivialSolver.solve(self)
         SimpleBoxesSolver.solve(self)
 
+        if self.is_complete():
+            return
 
-class BalancedRowSolver(TrivialRowSolver, SimpleBoxesRowSolver, Row):
+        self.update_row_solvers()
+        BlanksSolver.solve(self)
+
+
+class BalancedRowSolver(BlanksRowSolver, TrivialRowSolver, SimpleBoxesRowSolver, Row):
     pass

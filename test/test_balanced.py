@@ -14,6 +14,12 @@ class TestBalancedSolver(unittest.TestCase):
         solver.solve()
         self.assertGreaterEqual(solver.percent_complete(), 88)
 
+    def test_solver_update(self):
+        solver = BalancedSolver(file="test/puzzles/edge.json")
+        solver.solve()
+        self.assertTrue(solver.is_complete())
+        self.assertTrue(solver.is_correct())
+
 
 if __name__ == '__main__':
     unittest.main()
