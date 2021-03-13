@@ -4,7 +4,6 @@ import unittest
 test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
 sys.path.insert(0, os.path.abspath(test_path))   # noqa
 
-from solver.error import *  # noqa: E402
 from solver.compound.balanced import BalancedSolver  # noqa: E402
 
 

@@ -4,7 +4,7 @@ import unittest
 test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
 sys.path.insert(0, os.path.abspath(test_path))   # noqa
 
-from solver.error import *  # noqa: E402
+from solver.error import LengthError, ClueError, SetSolutionError  # noqa: E402
 import solver.nonogram as nonogram  # noqa: E402
 
 
