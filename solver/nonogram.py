@@ -1,12 +1,12 @@
 import json
-from solver.error import *
+from solver.error import LengthError, ClueError, AxisError, SetSolutionError
 
 
 class Nonogram:
     """Main nonogram class
 
     Used to hold the data of the nonogram.
-    also has some basic creation and helper functions
+    Also has some basic creation and helper functions.
     """
     printable_values = {0: "  ",
                         -1: "..",
@@ -19,7 +19,7 @@ class Nonogram:
         self.clues = dict()
         self.size = dict()
 
-        if file == None:
+        if file is None:
             # Create empty Nonogram
             self.size["x"] = size_x
             self.size["y"] = size_y
@@ -35,7 +35,7 @@ class Nonogram:
         self.init_row_solvers()
 
     def init_row_solvers(self, solver_class=None):
-        if None == solver_class:
+        if None is solver_class:
             # Use default
             solver_class = Row
         self.row_solver = dict()
@@ -95,7 +95,7 @@ class Nonogram:
         Updates all row solvers with the overall solution, so rows get info from columns 
         and vice versa. Does not check if new info fits with old info, and does not update 
         completed rows.
-        """
+        """  # noqa
         for axis in self.row_solver:
             for index, row_solver in enumerate(self.row_solver[axis]):
                 if row_solver.solved:
