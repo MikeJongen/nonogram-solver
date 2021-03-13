@@ -9,7 +9,7 @@ from solver.compound.balanced import BalancedSolver  # noqa: E402
 
 class TestBalancedSolver(unittest.TestCase):
     def test_solver(self):
-        solver = BalancedSolver(file="test/puzzles/nonogram_trivial.json")
+        solver = BalancedSolver(file="test/puzzles/trivial.json")
         solver.solve()
         self.assertGreaterEqual(solver.percent_complete(), 88)
 

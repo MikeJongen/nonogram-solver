@@ -15,7 +15,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_init_from_file(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_load.json")
+            nonogram.Nonogram(file="test/puzzles/load.json")
         expected_size = {"x": 5, "y": 5}
         expected_solution = [[1,  1,  1,  1,  1],
                              [-1, -1, -1, -1, -1],
@@ -54,7 +54,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_iscorrect(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_load.json")
+            nonogram.Nonogram(file="test/puzzles/load.json")
         self.assertTrue(new_nonogram.is_correct())
         new_nonogram.solution[0][0] = -1
         self.assertFalse(new_nonogram.is_correct())
@@ -137,7 +137,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_load(self):
         new_nonogram = nonogram.Nonogram(5, 5)
-        new_nonogram.load("test/puzzles/nonogram_load.json")
+        new_nonogram.load("test/puzzles/load.json")
         expected_size = {"x": 5, "y": 5}
         expected_solution = [[1,  1,  1,  1,  1],
                              [-1, -1, -1, -1, -1],
@@ -155,7 +155,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_load_clues(self):
         new_nonogram = nonogram.Nonogram(5, 5)
-        new_nonogram.load("test/puzzles/nonogram_clues_only.json")
+        new_nonogram.load("test/puzzles/clues_only.json")
         expected_size = {"x": 5, "y": 5}
         expected_solution = [[0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
@@ -173,7 +173,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_setsolutionrow(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_halfdone.json")
+            nonogram.Nonogram(file="test/puzzles/halfdone.json")
         test_column = [1, -1, 0, -1, 1]
         new_nonogram._set_solution_row("y", 2, test_column)
         new_column = new_nonogram._get_solution_row("y", 2)
@@ -185,7 +185,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_setsolutionvalue(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_halfdone.json")
+            nonogram.Nonogram(file="test/puzzles/halfdone.json")
         new_nonogram._set_solution_value(0, 0, 1)
         self.assertEqual(new_nonogram.solution[0][0], 1)
         new_nonogram._set_solution_value(0, 1, 0)
@@ -203,7 +203,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_setsolutionvalueerror(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_halfdone.json")
+            nonogram.Nonogram(file="test/puzzles/halfdone.json")
         self.assertRaises(SetSolutionError,
                           new_nonogram._set_solution_value, 0, 2, -1)
         self.assertEqual(new_nonogram.solution[0][2], 1)
@@ -213,7 +213,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_setsolutionvalueforced(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_halfdone.json")
+            nonogram.Nonogram(file="test/puzzles/halfdone.json")
         new_nonogram._set_solution_value(0, 2, -1, 1)
         self.assertEqual(new_nonogram.solution[0][2], -1)
         new_nonogram._set_solution_value(1, 2, 1, 1)
@@ -221,7 +221,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_getsolutionrow(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_load.json")
+            nonogram.Nonogram(file="test/puzzles/load.json")
         row = new_nonogram._get_solution_row("x", 1)
         expected_row = [1, -1, 1, -1, -1]
         self.assertEqual(expected_row, row)
@@ -235,7 +235,7 @@ class TestNonogram(unittest.TestCase):
         change the original solution.
         """
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_trivial.json")
+            nonogram.Nonogram(file="test/puzzles/trivial.json")
         expected_solution = [[0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
@@ -251,7 +251,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_get_clue_solution_pair(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_load.json")
+            nonogram.Nonogram(file="test/puzzles/load.json")
         pair = new_nonogram.get_clue_solution_pair("x", 1)
         self.assertEqual(pair, ([1, 1], [1, -1, 1, -1, -1]))
         pair = new_nonogram.get_clue_solution_pair("y", 1)
@@ -259,7 +259,7 @@ class TestNonogram(unittest.TestCase):
 
     def test_reset(self):
         new_nonogram = \
-            nonogram.Nonogram(file="test/puzzles/nonogram_load.json")
+            nonogram.Nonogram(file="test/puzzles/load.json")
         new_nonogram.reset_solution()
         empty_solution = [[0, 0, 0, 0, 0],
                           [0, 0, 0, 0, 0],

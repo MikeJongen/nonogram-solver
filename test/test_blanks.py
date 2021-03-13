@@ -21,7 +21,7 @@ class TestBalancedSolver(unittest.TestCase):
         self.assertEqual(row.values, expected)
 
     def test_solver(self):
-        solver = BlanksSolver(file="test/puzzles/nonogram_blanks.json")
+        solver = BlanksSolver(file="test/puzzles/blanks.json")
         solver.solve()
         self.assertTrue(solver.is_complete())
         self.assertTrue(solver.is_correct())
