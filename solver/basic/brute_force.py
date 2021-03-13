@@ -23,17 +23,6 @@ class BruteForceSolver(Nonogram):
                                                        row_solution)
         self._set_solution_row(input_axis, index, row_solution)
 
-    def _get_matching_solution(self, row1, row2):
-        if len(row1) != len(row2):
-            raise LengthError
-        solution = []
-        for value1, value2 in zip(row1, row2):
-            if value1 == value2:
-                solution.append(value1)
-            else:
-                solution.append(0)
-        return solution
-
 
 class BruteForceRowSolver(Row):
     def solve_blanks(self):
@@ -123,3 +112,18 @@ class BruteForceRowSolver(Row):
                 continue
             return False
         return True
+
+    def _get_matching_solution(self, solution1, solution2):
+        """
+        Returns a combination of two solutions.
+
+        All common cells stay the same, different cells are changed to unknown.
+        Assumes solutions have no unknown values.
+        """
+        solution = []
+        for value1, value2 in zip(solution1, solution2):
+            if value1 == value2:
+                solution.append(value1)
+            else:
+                solution.append(0)
+        return solution

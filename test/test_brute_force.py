@@ -69,6 +69,14 @@ class TestBasic(unittest.TestCase):
         valid = row._check_solution([0, 1, 1, 0, 1])
         self.assertFalse(valid)
 
+    def test_matching_solutions(self):
+        row = brute_force.BruteForceRowSolver([2, 1], [0] * 5)
+        solution1 = [-1, 1, 1, -1, 1]
+        solution2 = [1, 1, -1, -1, 1]
+        expected_solution = [0, 1, 0, -1, 1]
+        solution = row._get_matching_solution(solution1, solution2)
+        self.assertEqual(expected_solution, solution)
+
     # def test_fillcommonelementsrow(self):
     #     new_nonogram = brute_force.BruteForceSolver(10, 5)
     #     clues_y = [[4], [2, 2], [5], [5], [2, 1],
@@ -117,14 +125,6 @@ class TestBasic(unittest.TestCase):
     #     self.assertRaises(LengthError,
     #                       new_nonogram._get_matching_solution,
     #                       row2, row1)
-
-    # def test_matching_solution_full_rows(self):
-    #     new_nonogram = brute_force.BruteForceSolver(5, 5)
-    #     row1 = [1, -1, 1, -1, 1]
-    #     row2 = [1, 1, -1, -1, 1]
-    #     expected_solution = [1, 0, 0, -1, 1]
-    #     solution = new_nonogram._get_matching_solution(row1, row2)
-    #     self.assertEqual(expected_solution, solution)
 
     # def test_list_of_solutions_empty(self):
     #     new_nonogram = brute_force.BruteForceSolver(5, 5)
