@@ -90,6 +90,11 @@ class Nonogram:
         values = self._get_solution_row(axis, row_index)
         return (clues, values)
 
+    def update_row_solvers(self):
+        for axis in self.row_solver:
+            for index, row_solver in enumerate(self.row_solver[axis]):
+                row_solver.update_values(self._get_solution_row(axis, index))
+
     def is_complete(self) -> bool:
         """
         Checks if puzzle is completely filled in (no unknown values left)

@@ -279,6 +279,19 @@ class TestNonogram(unittest.TestCase):
         for index, clue in enumerate(x_clues):
             self.assertEqual(puzzle.row_solver["x"][index].clues, clue)
 
+    def test_update_row_solvers(self):
+        puzzle = nonogram.Nonogram(file="test/puzzles/full.json")
+        puzzle._set_solution_row("x", 0, [1] * 5)
+        puzzle._set_solution_row("x", 1, [1] * 5)
+        puzzle._set_solution_row("x", 2, [1] * 5)
+        puzzle._set_solution_row("x", 3, [1] * 5)
+        puzzle._set_solution_row("x", 4, [1] * 5)
+        for index in range(5):
+            self.assertFalse(puzzle.row_solver["y"][index].is_complete())
+        puzzle.update_row_solvers()
+        for index in range(5):
+            self.assertTrue(puzzle.row_solver["y"][index].is_complete())
+
 
 if __name__ == '__main__':
     unittest.main()
