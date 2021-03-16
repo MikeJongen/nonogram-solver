@@ -188,8 +188,8 @@ class Nonogram:
         file = open(file, 'r')
         data = json.load(file)
         self.clues = data["clues"]
-        self.size["x"] = len(self.clues["x"])
-        self.size["y"] = len(self.clues["y"])
+        self.size["y"] = len(self.clues["x"])
+        self.size["x"] = len(self.clues["y"])
         if "solution" in data:
             self.solution = data["solution"]
         else:

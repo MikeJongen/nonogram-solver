@@ -171,6 +171,25 @@ class TestNonogram(unittest.TestCase):
         self.assertEqual(expected_solution, new_nonogram.solution)
         self.assertEqual(expected_clues, new_nonogram.clues)
 
+    def test_load_clues_5_10(self):
+        new_nonogram = nonogram.Nonogram(5, 5)
+        new_nonogram.load("test/puzzles/clues_only_5_10.json")
+        expected_size = {"x": 5, "y": 10}
+        expected_solution = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        expected_clues_x = [[1, 2], [1, 1], [1, 3], [1],
+                            [1, 2], [1, 2], [1, 1], [1, 3], [1], [1, 2]]
+        expected_clues_y = [[10], [], [3, 4, 1], [1, 1, 2, 1, 1], [1, 1]]
+        expected_clues = dict()
+        expected_clues["x"] = expected_clues_x
+        expected_clues["y"] = expected_clues_y
+        self.assertEqual(expected_size, new_nonogram.size)
+        self.assertEqual(expected_solution, new_nonogram.solution)
+        self.assertEqual(expected_clues, new_nonogram.clues)
+
     def test_setsolutionrow(self):
         new_nonogram = \
             nonogram.Nonogram(file="test/puzzles/halfdone.json")
