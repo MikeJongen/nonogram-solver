@@ -1,8 +1,8 @@
 from solver.nonogram import Nonogram, Row
-from solver.basic.brute_force import BruteForceSolver, BruteForceRowSolver
+from solver.basic.brute_force_2 import BruteForceSolver2, BruteForceRowSolver2
 
 
-class OnlyBruteForceSolver(BruteForceSolver, Nonogram):
+class OnlyBruteForceSolver(BruteForceSolver2, Nonogram):
     """
     Only uses brute force.
     """
@@ -20,9 +20,9 @@ class OnlyBruteForceSolver(BruteForceSolver, Nonogram):
         while not self.is_complete():
             if not first_loop:
                 self.update_row_solvers()
-            BruteForceSolver.solve(self)
+            BruteForceSolver2.solve(self)
             first_loop = False
 
 
-class OnlyBruteForceRowSolver(BruteForceRowSolver, Row):
+class OnlyBruteForceRowSolver(BruteForceRowSolver2, Row):
     pass
