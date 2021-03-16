@@ -118,6 +118,23 @@ class TestBasic(unittest.TestCase):
         self.assertTrue(puzzle.is_complete())
         self.assertTrue(puzzle.is_correct())
 
+    def test_reset(self):
+        puzzle = brute_force.BruteForceSolver2(file="test/puzzles/stairs.json")
+        puzzle.solve()
+        puzzle.update_row_solvers()
+        puzzle.solve()
+        puzzle.update_row_solvers()
+        puzzle.solve()
+        for axis in puzzle.row_solver:
+            for row_solver in puzzle.row_solver[axis]:
+                self.assertTrue(hasattr(row_solver, 'number_of_solutions'))
+                self.assertTrue(hasattr(row_solver, 'all_solutions'))
+        puzzle.reset_solution()
+        for axis in puzzle.row_solver:
+            for row_solver in puzzle.row_solver[axis]:
+                self.assertFalse(hasattr(row_solver, 'number_of_solutions'))
+                self.assertFalse(hasattr(row_solver, 'all_solutions'))
+
 
 if __name__ == '__main__':
     unittest.main()
