@@ -12,11 +12,10 @@ class BruteForceSolver(Nonogram):
         Nonogram.init_row_solvers(self, BruteForceRowSolver)
 
     def solve(self):
-        for axis in self.row_solver:
-            for index, row_solver in enumerate(self.row_solver[axis]):
-                changed = row_solver.solve_brute_force()
-                if changed:
-                    self._set_solution_row(axis, index, row_solver.values)
+        """
+        Returns True if anything was changed to the solution.
+        """
+        return self.solve_single_iteration(BruteForceRowSolver.solve_brute_force)
 
 
 class BruteForceRowSolver(Row):

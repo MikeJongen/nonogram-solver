@@ -17,14 +17,7 @@ class SimpleBoxesSolver(Nonogram):
         Does not require to update rows before solving, as this algorithm
         does not use information from the solution.
         """
-        for index, row_solver in enumerate(self.row_solver["y"]):
-            changed = row_solver.solve_simple_boxes()
-            if changed:
-                self._set_solution_row("y", index, row_solver.values)
-        for index, row_solver in enumerate(self.row_solver["x"]):
-            changed = row_solver.solve_simple_boxes()
-            if changed:
-                self._set_solution_row("x", index, row_solver.values)
+        return self.solve_single_iteration(SimpleBoxesRowSolver.solve_simple_boxes)
 
 
 class SimpleBoxesRowSolver(Row):

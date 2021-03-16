@@ -90,6 +90,21 @@ class Nonogram:
         values = self._get_solution_row(axis, row_index)
         return (clues, values)
 
+    def solve_single_iteration(self, solver_function):
+        """
+        Tries to solve all rows a single time, using given solver function. 
+
+        Returns True if anything was changed to the solution.
+        """
+        total_change = False
+        for axis in self.row_solver:
+            for index, row_solver in enumerate(self.row_solver[axis]):
+                row_changed = solver_function(row_solver)
+                if row_changed:
+                    self._set_solution_row(axis, index, row_solver.values)
+                    total_change = True
+        return total_change
+
     def update_row_solvers(self):
         """
         Updates all row solvers with the overall solution, so rows get info from columns

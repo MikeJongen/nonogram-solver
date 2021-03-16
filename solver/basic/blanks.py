@@ -13,15 +13,10 @@ class BlanksSolver(Nonogram):
         Nonogram.init_row_solvers(self, BlanksRowSolver)
 
     def solve(self):
-        """only solves rows/columns which have one possible solution"""
-        for index, row_solver in enumerate(self.row_solver["y"]):
-            changed = row_solver.solve_blanks()
-            if changed:
-                self._set_solution_row("y", index, row_solver.values)
-        for index, row_solver in enumerate(self.row_solver["x"]):
-            changed = row_solver.solve_blanks()
-            if changed:
-                self._set_solution_row("x", index, row_solver.values)
+        """
+        Returns True if anything was changed to the solution.
+        """
+        return self.solve_single_iteration(BlanksRowSolver.solve_blanks)
 
 
 class BlanksRowSolver(Row):

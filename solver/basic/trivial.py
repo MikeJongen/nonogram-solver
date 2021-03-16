@@ -14,15 +14,10 @@ class TrivialSolver(Nonogram):
         Nonogram.init_row_solvers(self, TrivialRowSolver)
 
     def solve(self):
-        """only solves rows/columns which have one possible solution"""
-        for index, row_solver in enumerate(self.row_solver["y"]):
-            changed = row_solver.solve_defined_row()
-            if changed:
-                self._set_solution_row("y", index, row_solver.values)
-        for index, row_solver in enumerate(self.row_solver["x"]):
-            changed = row_solver.solve_defined_row()
-            if changed:
-                self._set_solution_row("x", index, row_solver.values)
+        """
+        only solves rows/columns which have one possible solution
+        """
+        return self.solve_single_iteration(TrivialRowSolver.solve_defined_row)
 
 
 class TrivialRowSolver(Row):
