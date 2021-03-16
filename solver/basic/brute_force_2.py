@@ -20,6 +20,13 @@ class BruteForceSolver2(Nonogram):
 
 
 class BruteForceRowSolver2(BruteForceRowSolver, Row):
+    def reset(self):
+        if hasattr(self, 'number_of_solutions'):
+            del(self.number_of_solutions)
+        if hasattr(self, 'all_solutions'):
+            del(self.all_solutions)
+        super().reset()
+
     def solve_brute_force_save_intermediate(self, maximum_solutions=100000):
         """
         RowSolver for BruteForceSaveIntermediateSolver class
@@ -41,14 +48,19 @@ class BruteForceRowSolver2(BruteForceRowSolver, Row):
 
         if not hasattr(self, 'all_solutions'):
             self.all_solutions = self._get_all_solutions()
+
         new_solution = None
+        # only keep solutions that fit with the current solution
+        self.all_solutions = [
+            solution for solution in self.all_solutions if self._check_solution(solution)]
+        # combine solutions
         for solution in self.all_solutions:
-            if self._check_solution(solution):
-                if new_solution is None:
-                    new_solution = solution
-                    continue
-                new_solution = self._get_matching_solution(
-                    new_solution, solution)
+            if new_solution is None:
+                new_solution = solution
+                continue
+            new_solution = self._get_matching_solution(
+                new_solution, solution)
+
         if self.values == new_solution:
             return False
         if new_solution is not None:
