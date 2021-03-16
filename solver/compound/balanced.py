@@ -20,11 +20,13 @@ class BalancedSolver(BruteForceSolver, BlanksSolver, TrivialSolver, SimpleBoxesS
         TrivialSolver.solve(self)
         SimpleBoxesSolver.solve(self)
 
-        while not self.is_complete():
+        solution_changed = True
+        while not self.is_complete() and solution_changed:
+            solution_changed = False
             self.update_row_solvers()
-            BlanksSolver.solve(self)
+            solution_changed |= BlanksSolver.solve(self)
             self.update_row_solvers()
-            BruteForceSolver.solve(self)
+            solution_changed |= BruteForceSolver.solve(self)
 
 
 class BalancedRowSolver(BruteForceRowSolver, BlanksRowSolver, TrivialRowSolver, SimpleBoxesRowSolver, Row):
