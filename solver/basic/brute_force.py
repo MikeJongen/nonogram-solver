@@ -49,7 +49,8 @@ class BruteForceRowSolver(Row):
                     new_solution, solution)
         if self.values == new_solution:
             return False
-        self.values = new_solution
+        if new_solution is not None:
+            self.values = new_solution
 
         return True
 
