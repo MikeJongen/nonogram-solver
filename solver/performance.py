@@ -106,7 +106,7 @@ class TestRunner:
 
 if __name__ == '__main__':
     testrunner = TestRunner(balanced.BalancedSolver)
-    testrunner.run(verbose=True)
+    testrunner.run(iterations=10, verbose=True, path="puzzles/medium/")
 
     testrunner = TestRunner(only_brute_force.OnlyBruteForceSolver)
-    testrunner.run(iterations=1000)
+    testrunner.run(iterations=10, path="puzzles/medium/")
