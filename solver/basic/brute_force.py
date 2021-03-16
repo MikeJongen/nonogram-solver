@@ -19,7 +19,7 @@ class BruteForceSolver(Nonogram):
 
 
 class BruteForceRowSolver(Row):
-    def solve_brute_force(self, maximum_solutions=100):
+    def solve_brute_force(self, maximum_solutions=100000):
         """
         RowSolver for BruteForceSolver class
 
