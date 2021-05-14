@@ -1,8 +1,8 @@
-from solver.nonogram import Nonogram, Row
-from solver.basic.simple_boxes import SimpleBoxesSolver, SimpleBoxesRowSolver
-from solver.basic.trivial import TrivialSolver, TrivialRowSolver
-from solver.basic.blanks import BlanksSolver, BlanksRowSolver
-from solver.basic.brute_force_2 import BruteForceSolver2, BruteForceRowSolver2
+from nonogram_solver.nonogram import Nonogram, Row
+from nonogram_solver.basic.simple_boxes import SimpleBoxesSolver, SimpleBoxesRowSolver
+from nonogram_solver.basic.trivial import TrivialSolver, TrivialRowSolver
+from nonogram_solver.basic.blanks import BlanksSolver, BlanksRowSolver
+from nonogram_solver.basic.brute_force_2 import BruteForceSolver2, BruteForceRowSolver2
 
 
 class BalancedSolver(BruteForceSolver2, BlanksSolver, TrivialSolver, SimpleBoxesSolver, Nonogram):

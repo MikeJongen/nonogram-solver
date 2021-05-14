@@ -1,5 +1,5 @@
-from solver.nonogram import Nonogram, Row
-from solver.basic.brute_force import BruteForceRowSolver
+from nonogram_solver.nonogram import Nonogram, Row
+from nonogram_solver.basic.brute_force import BruteForceRowSolver
 
 
 class BruteForceSolver2(Nonogram):

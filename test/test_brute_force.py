@@ -4,7 +4,7 @@ import unittest
 test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
 sys.path.insert(0, os.path.abspath(test_path))   # noqa
 
-import solver.basic.brute_force as brute_force  # noqa: E402
+import nonogram_solver.basic.brute_force as brute_force  # noqa: E402
 
 
 class TestBasic(unittest.TestCase):

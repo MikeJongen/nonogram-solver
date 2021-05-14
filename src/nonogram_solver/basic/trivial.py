@@ -1,5 +1,5 @@
-from solver.nonogram import Nonogram
-from solver.nonogram import Row
+from nonogram_solver.nonogram import Nonogram
+from nonogram_solver.nonogram import Row
 
 
 class TrivialSolver(Nonogram):

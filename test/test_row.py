@@ -4,7 +4,7 @@ import unittest
 test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
 sys.path.insert(0, os.path.abspath(test_path))   # noqa
 
-import solver.nonogram as nonogram  # noqa: E402
+import nonogram_solver.nonogram as nonogram  # noqa: E402
 
 
 class TestRow(unittest.TestCase):

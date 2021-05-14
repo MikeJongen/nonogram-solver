@@ -4,8 +4,8 @@ import timeit
 test_path = os.path.join(os.path.dirname(__file__), '../')  # noqa
 sys.path.insert(0, os.path.abspath(test_path))  # noqa
 
-from solver.compound import balanced  # noqa: E402
-from solver.compound import only_brute_force  # noqa: E402
+from nonogram_solver.compound import balanced  # noqa: E402
+from nonogram_solver.compound import only_brute_force  # noqa: E402
 
 
 class PerformanceTest:
@@ -46,8 +46,8 @@ class TestRunner:
         self.print_summary()
 
     def run_timing_test(self, puzzle, iterations=10000):
-        setup = ("from solver.performance import PerformanceTest\n"
-                 "import solver\n"
+        setup = ("from nonogram_solver.performance import PerformanceTest\n"
+                 "import nonogram_solver\n"
                  "test = PerformanceTest("
                  + self.solver.__module__ + "." + self.solver.__name__ +
                  ", "

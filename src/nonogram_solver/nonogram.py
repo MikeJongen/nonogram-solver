@@ -1,5 +1,5 @@
 import json
-from solver.error import LengthError, ClueError, AxisError, SetSolutionError
+from nonogram_solver.error import LengthError, ClueError, AxisError, SetSolutionError
 
 
 class Nonogram:
