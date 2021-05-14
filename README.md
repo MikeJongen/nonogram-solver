@@ -39,7 +39,7 @@ A nonogram can be created manually or by loading a json file.
 #### Manual creation
 ```
 # Import required classes
-from solver.compound.balanced import BalancedSolver
+from nonogram_solver.compound.balanced import BalancedSolver
 # Create puzzle of size 5 by 5
 puzzle = BalancedSolver(5, 5)
 # Set clues for the (horizontal) rows
@@ -54,7 +54,7 @@ puzzle.save("puzzles/new_puzzle.json")
 #### Loading a file
 ```
 # Import required classes
-from solver.compound.balanced import BalancedSolver
+from nonogram_solver.compound.balanced import BalancedSolver
 # Load puzzle from file
 puzzle = BalancedSolver(file="puzzles/easy/pyramid.json")
 ```
@@ -101,8 +101,8 @@ puzzle.reset_solution()
 The performance module has some functionality to test and compare different solver classes
 ```
 # Import required classes
-from solver.performance import TestRunner
-from solver.compound.balanced import BalancedSolver
+from nonogram_solver.performance import TestRunner
+from nonogram_solver.compound.balanced import BalancedSolver
 # Create a test runner, testing the BalancedSolver
 testrunner = TestRunner(BalancedSolver)
 # Run the tests
