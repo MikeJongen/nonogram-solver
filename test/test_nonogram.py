@@ -1,11 +1,9 @@
 import sys
 import os
 import unittest
-test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
-sys.path.insert(0, os.path.abspath(test_path))   # noqa
 
-from nonogram_solver.error import LengthError, ClueError, SetSolutionError  # noqa: E402
-import nonogram_solver.nonogram as nonogram  # noqa: E402
+from nonogram_solver.error import LengthError, ClueError, SetSolutionError
+import nonogram_solver.nonogram as nonogram
 
 
 class TestNonogram(unittest.TestCase):

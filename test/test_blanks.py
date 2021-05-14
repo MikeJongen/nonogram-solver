@@ -1,10 +1,8 @@
 import sys
 import os
 import unittest
-test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
-sys.path.insert(0, os.path.abspath(test_path))   # noqa
 
-from nonogram_solver.basic.blanks import BlanksSolver, BlanksRowSolver  # noqa: E402
+from nonogram_solver.basic.blanks import BlanksSolver, BlanksRowSolver
 
 
 class TestBalancedSolver(unittest.TestCase):

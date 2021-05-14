@@ -1,11 +1,9 @@
 import sys
 import os
 import unittest
-test_path = os.path.join(os.path.dirname(__file__), '../')   # noqa
-sys.path.insert(0, os.path.abspath(test_path))   # noqa
 
-import nonogram_solver.performance as performance  # noqa: E402
-import nonogram_solver.basic.trivial as trivial  # noqa: E402
+import nonogram_solver.performance as performance
+import nonogram_solver.basic.trivial as trivial
 
 
 class TestPerformance(unittest.TestCase):
