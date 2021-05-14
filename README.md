@@ -5,6 +5,29 @@ script to solve nonogram puzzles
 This project requires python 3.6 or higher.  
 No external libraries are required.
 
+## Installation
+### From github
+For Linux/MacOS:
+```
+python3 -m pip install git+https://github.com/MikeJongen/nonogram-solver#egg=nonogram_solver
+```
+
+For Windows:
+```
+py -m pip install git+https://github.com/MikeJongen/nonogram-solver#egg=nonogram_solver
+```
+
+### From local repo
+For Linux/MacOS:
+```
+python3 -m pip install <path>
+```
+
+For Windows:
+```
+py -m pip install <path>
+```
+
 ## Tutorial
 Note: This project includes several solver classes. For this tutorial, we use 
 the compound.balanced solver, as this is the most generic solver. The other solvers
